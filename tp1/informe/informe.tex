@@ -1,0 +1,156 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{pdfpages}
+\usepackage{appendix}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{caratula}
+
+\begin{document}
+
+
+\titulo{TP1: Wiretapping}
+
+\fecha{\today}
+
+\materia{Teoría de las comunicaciones}
+\integrante{Alvaro, José Fernando}{89/10}{fer1578@gmail.com}
+\integrante{Barbeito, Nicolás}{147/10}{nicolasbarbeiton@gmail.com}
+\integrante{Brum, Raúl}{199/98}{brumraul@gmail.com}
+\integrante{Nievas, Yésica}{340/05}{yesica.nievas@gmail.com}
+
+\maketitle
+\tableofcontents
+
+
+
+\newpage
+\section{Introducción}
+\paragraph{}
+
+\subsection{Paquetes ARP}
+El protocolo ARP (Address Resolution Protocol) permite mapear direcciones de nivel de red a direcciones físicas. La idea de este protocolo se basa en el envío de paquetes que pueden ser de preguntas o respuestas. El emisor del paquete que pregunta por una dirección, envía un mensaje broadcast sobre la red local, siendo respondido por un mensaje unicast por aquel al que pertenece la dirección consultada. Mediante el envío de estos paquetes ARP se construyen las tablas que mapean direcciones de red con direcciones físicas.
+
+\subsection{Entropía de una fuente}
+Para poder definir la entropía de una fuente, necesitamos la definición de información que aportan los símbolos emitidos por dicha fuente. Se define información de un símbolo \textit{s} como 
+\begin{center}
+	I (\textit{s}) = log(1/P(\textit{s})) 
+\end{center}
+siendo P(\textit{s}) la probabilidad de ocurrencia de dicho símbolo.
+De esta manera, puede calcularse la información media suministrada por una fuente de información de memoria nula (los símbolos emitidos son estadísticamente independientes) como 
+
+\begin{center}
+		\sum_{S} P(s_{i})I(s_{i})  \begin{tabular}{columns}
+			 \forall{s_{i}} \in{S} 
+		\end{tabular}
+
+\end{center}
+\begin{flushleft}
+	Esta cantidad media de información por símbolo de la fuente, recibe el nombre de \textit{entropía} H(S) de la fuente de memoria nula.
+\end{flushleft}
+
+\begin{center}
+		H(S) =\sum_{S} P(s_{i})log(1/P(s_{i})) 
+
+\end{center}
+	
+Debido a que la entropía de una fuente depende de la probabilidad de los diferentes símbolos que la componen, se puede demostrar que para una fuente de información de memoria nula con un alfabeto de q símbolos, el valor máximo de la entropía es precisamente log q, alcanzándose solamente si todos los símbolos son equiprobables.
+
+
+\subsection{Fuente S}
+
+Sea P la fuente de información generada a partir de todos los paquetes Ethernet que se transmiten en una determinada red entre los instantes de tiempo [t_{i}; t_{f} ]:
+
+	\[ P_{ti,tf} = \{p_{1}...p_{n}\}\] 
+
+\begin{flushleft}
+	siendo p{\scriptsize \textit{i}} el i-ésimo paquete transmitido en la red entre los instantes de tiempo [t_{i}; t_{f} ].
+\end{flushleft}
+\\
+Los paquetes p{\scriptsize \textit{i}} pertenecientes a P encapsulan diferentes protocolos, que se pueden identificar a través del campo type del frame de capa 2 (p.type en Scapy). Por lo tanto, con el objetivo de distinguir los protocolos utilizados en una red, se define otra fuente de información S de la siguiente manera:
+
+\[ S_{ti,tf} = \{s_{1}...s_{n}\}\] 
+
+\begin{flushleft}
+	siendo s{\scriptsize \textit{i}} = p{\scriptsize \textit{i}}.type /p{\scriptsize \textit{i}} perteneciente a P entre los instantes de tiempo [t_{i}; t_{f} ].
+\end{flushleft}
+
+
+\subsection{Propuesta de una nueva fuente S{\scriptsize 1}}
+\paragraph{}
+	Para analizar la entropía de la red en base a los paquetes ARP observados realizamos una nueva tool en base a la anterior que nos permitiera obtener datos de los campos de dichos paquetes. 
+	Se propone como nueva fuente S1 el conjunto de símbolos conformado por las distintas direcciones IP destino:\\
+	
+	
+		S{\scriptsize 1} = \{s{\scriptsize 1}{\tiny 1}...s{\scriptsize 1}{\tiny n}\} siendo s{\scriptsize 1}{\tiny i} el valor del campo \textit{pdst} correspondiente a la ip destino del paquete\\
+		
+	
+	Al igual que para la fuente S, realizamos el cálculo de la entropía como fue requerido, como la probabilidad e información de sus símbolos.  
+
+\newpage
+\section{Métodos y condiciones de cada experimento}
+
+\newpage
+\section{Resultados}
+
+\subsection{Cálculos y observaciones sobre la Entropía de las fuentes}
+\paragraph{}	
+
+	A continuación se adjuntan algunos los resultados obtenidos:
+	
+	
+	\begin{itemize}
+ 	 \item \textbf{"Muestra 1" \emph{(captura1.pcap):}}
+			\begin{itemize}
+				\item \texttt{Entropía Fuente S: }				
+				\item \texttt{Entropía Fuente S{\scriptsize 1}: }
+			\end{itemize}
+
+ 	 \item \textbf{"Muestra 2" \emph{(captura2.pcap)}:}
+		   \begin{itemize}
+				\item \texttt{Entropía Fuente S: }				
+				\item \texttt{Entropía Fuente S{\scriptsize 1}: }
+		   \end{itemize}
+		   
+ 	 \item \textbf{"Muestra 3" \emph{(captura3.pcap)}:}
+		 	 \begin{itemize}
+		 	 	\item \texttt{Entropía Fuente S: }				
+		 	 	\item \texttt{Entropía Fuente S{\scriptsize 1}: }
+		 	 \end{itemize}
+		   
+	 \item \textbf{"Muestra 4" \emph{(captura4.pcap)}:}
+		   \begin{itemize}
+		   	\item \texttt{Entropía Fuente S: }				
+		   	\item \texttt{Entropía Fuente S{\scriptsize 1}: }
+		   \end{itemize}
+		   		   		 	 		   
+	\end{itemize}
+
+\subsection{Protocolos y nodos distinguidos y proporción de paquetes ARP}
+	
+
+	
+\newpage
+\section{Gráficos y análisis}
+\paragraph{}
+A continuación haremos un análisis de cada una de las redes de las cuales capturamos su tráfico. Para ello, haremos uso de distintos gráficos que nos ayudarán a visualizar mejor la información del tráfico en cada red.
+
+
+\newpage
+\subsection{Analizando tráfico de "captura1" \emph{(captura1.pcap)}}
+
+\newpage
+\subsection{Analizando tráfico de "captura2" \emph{(captura2.pcap)}}
+
+\newpage
+\subsection{Analizando tráfico de "captura3" \emph{(captura3.pcap)}}
+
+\newpage
+\subsection{Analizando tráfico de "captura4" \emph{(captura4.pcap)}}
+
+\newpage
+\section{Referencias}
+
+\end{document}
