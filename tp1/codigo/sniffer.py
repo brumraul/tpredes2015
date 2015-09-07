@@ -5,8 +5,10 @@ from scapy.utils import wrpcap
 from math import log
 import sys
 import os
+import time
 import operator
 import argparse
+import thread
 
 htypes = {}
 ipssrc = {}
@@ -47,12 +49,16 @@ def monitor_callback_arp(pkt):
         ipsdst[dst] = ipsdst.get(dst, 0.0) + 1.0
 
 def informacion(diccionario):
+    inf = ""
     for simbolo in diccionario.keys():
-	    return "simbolo : %4s, Informacion : %f" % (simbolo, info_simbolo(diccionario, simbolo))
+	    inf +=  "simbolo : %4s, Informacion : %f\n" % (simbolo, info_simbolo(diccionario, simbolo))
+    return inf
 
 def probabilidad(diccionario):
+    prob = ""
     for simbolo in diccionario.keys():
-        return "simbolo : %4s, Probabilidad : %f" % (simbolo, prob_simbolo(diccionario, simbolo))
+        prob += "simbolo : %4s, Probabilidad : %f\n" % (simbolo, prob_simbolo(diccionario, simbolo))
+    return prob
 
 def valid_file(parser, arg):
     global offline
@@ -65,6 +71,14 @@ def valid_file(parser, arg):
 def check_root():
     if os.getuid() != 0:
         raise RuntimeError("You need to run this script with root privileges!")
+
+def countdown(t):
+    for remaining in range(t-1, 0, -1):
+        sys.stdout.write("\r")
+        sys.stdout.write("{:2d} seconds remaining...".format(remaining)) 
+        sys.stdout.flush()
+        time.sleep(1)
+    sys.stdout.write("\rComplete!                           \n\n")
 
 
 parser = argparse.ArgumentParser(description='''Network traffic capture tool.''')
@@ -95,7 +109,11 @@ if args.nodes:
             monitor_callback_arp(pkt)
     else:
         #realizamos un sniff online filtrando por nodes
-        sniff(prn=monitor_callback_arp, store=0, timeout=args.time, filter='arp')
+        try:
+            thread.start_new_thread(countdown, (args.time,))
+            sniff(prn=monitor_callback_arp, store=0, timeout=args.time, filter='arp')
+        except:
+            print "Error: unable to start thread"
 
     print "Entropia Fuente IPs Dst: %f" % entropia(ipsdst)
     print "Entropia Fuente IPs Src: %f" % entropia(ipssrc) + '\n'    
@@ -116,7 +134,11 @@ if offline:
             monitor_callback_all(pkt)
 else:
     #ejecutamos el sniff online
-    sniff(prn=monitor_callback_all, store=0, timeout=args.time)
+    try:
+        thread.start_new_thread(countdown, (args.time,))
+        sniff(prn=monitor_callback_all, store=0, timeout=args.time)
+    except:
+        print "Error: unable to start thread"
 
 print "Entropia Fuente HW Type: %f" % entropia(htypes) + '\n'
 print probabilidad(htypes)
