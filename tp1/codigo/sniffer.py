@@ -92,11 +92,15 @@ args = parser.parse_args()
 if not offline or not args.dump == None:
     check_root()
 
-print '\n' + "Running %s with parameters: time=%s, input=%s, nodes=%s"%(os.path.basename(sys.argv[0]) ,args.time, args.input, args.nodes) + '\n'
+print '\n' + "Running %s with parameters: time=%s, input=%s, dump=%s, nodes=%s"%(os.path.basename(sys.argv[0]) ,args.time, args.input, args.dump, args.nodes) + '\n'
 
 if not args.dump == None:
     #dump to file & exit
-    pkts = sniff(timeout=args.time)
+    try:
+        thread.start_new_thread(countdown, (args.time,))
+        pkts = sniff(timeout=args.time)
+    except:
+        print "Error: unable to start thread"
     wrpcap(args.dump,pkts)
     print 'output saved in file {}'.format(args.dump)
     exit(0)
