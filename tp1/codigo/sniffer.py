@@ -37,6 +37,8 @@ def monitor_callback_all(pkt):
 #        htype = hex(pkt.type)
         if pkt.type == 34525:
             htype = 'IPv6'
+        elif pkt.type < 1536: # if < 0x0600 it's the payload size and not the ethertype
+            return
         else:
             htype = pkt.payload.name
 	htypes[htype] = htypes.get(htype, 0.0) + 1.0
