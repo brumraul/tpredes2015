@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{textcomp}
+%\usepackage{hyperref}
 
 \begin{document}
 
@@ -42,7 +43,7 @@ Trabajo Práctico \textnumero 1: Wiretapping}
 Our premise is ...
 \end{abstract}
 
-\section{Introducción}
+\section{Introducción}\label{sec:intro}
 
 \subsection{Paquetes ARP}
 El protocolo ARP (Address Resolution Protocol) permite mapear direcciones de nivel de red a direcciones físicas. La idea de este protocolo se basa en el envío de paquetes que pueden ser de preguntas o respuestas. El emisor del paquete que pregunta por una dirección, envía un mensaje broadcast sobre la red local, siendo respondido por un mensaje unicast por aquel al que pertenece la dirección consultada. Mediante el envío de estos paquetes ARP se construyen las tablas que mapean direcciones de red con direcciones físicas.
@@ -71,7 +72,7 @@ $\sum_{S} P(s_{i})I(s_{i}) \forall{s_{i}} \in{S}$
 Debido a que la entropía de una fuente depende de la probabilidad de los diferentes símbolos que la componen, se puede demostrar que para una fuente de información de memoria nula con un alfabeto de q símbolos, el valor máximo de la entropía es precisamente log q, alcanzándose solamente si todos los símbolos son equiprobables.
 
 
-\subsection{Fuente S}
+\subsection{Fuente S} \label{ssec:fuenteS}
 
 Sea P la fuente de información generada a partir de todos los paquetes Ethernet que se transmiten en una determinada red entre los instantes de tiempo $[t_{i}, t_{f}]$:
 
@@ -90,7 +91,7 @@ $S_{ti,tf} = \{s_{1}...s_{n}\}$
 \end{flushleft}
 
 
-\subsection{Propuesta de una nueva fuente S{\scriptsize 1}}
+\subsection{Propuesta de una nueva fuente S{\scriptsize 1}} \label{ssec:fuenteS1}
 Para analizar la entropía de la red en base a los paquetes ARP observados realizamos una nueva tool en base a la anterior que nos permitiera obtener datos de los campos de dichos paquetes. 
 	Se propone como nueva fuente S1 el conjunto de símbolos conformado por las distintas direcciones IP destino:\\
 	
@@ -112,10 +113,54 @@ Esta medición fue realizada en la Lan de una casa por un intervalo de 2 horas. 
 \subsection{red 3}
 \subsection{red 4}
 
-\section{Resultados}
+\section{Resultados y Análisis}
+En esta sección mostraremos y analizaremos los resultados obtenidos en las mediciones realizadas en las distintas redes tanto para la fuente $S$ y $S_1$ descriptas en la sección ~\ref{sec:intro} ~\ref{ssec:fuenteS} y ~\ref{ssec:fuenteS1}. Para cada una de las redes veremos sus protocolos distinguidos, la proporción de paquetes ARP en el trafico de la red y los nodos (representados por ip) distinguidos.
 
-\subsection{Cálculos y observaciones sobre la Entropía de las fuentes}
+\subsection{Home Lan}
+\subsubsection{Fuente S}
 
+Los resultados obtenidos para la fuente $S$ fueron:
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Protocolo} & \textbf{Informacion} & \textbf{Probabilidad} \\ \hline
+            \texttt{EAPOL     }& 12.31       & 0.01\%     \\ \hline
+            \texttt{ARP       }& 5.11        & 2.88\%     \\ \hline
+            \texttt{IPv6      }& 4.22        & 5.33\%     \\ \hline
+            \texttt{IPv4      }& 0.12        & 91.76\%    \\ \hline
+        \end{tabular}
+        \caption{Home Lan - Protocolos}
+        \label{table:homelanS}
+    \end{center}
+\end{table}
+
+Como puede observarse en la figura~\ref{torta:homelanS} el protocolo mas utilizado es IPv4 en un 91.76\% mientras que IPv6 y ARP solo son utilizados en un 5.33\% y 2.88\% respectivamente. EAPOL (autenticación wireless) no tiene prácticamente incidencia.
+Observamos ademas que el protocolo ARP tiene solo una incidencia del 2.88\% en el trafico total de la fuente lo que hace que el overhead aportado por el mismo no sea significativo. 
+
+\begin{figure}[ht]
+    \begin{center}
+%        \includegraphics[width=0.5\textwidth]{torta.png}
+        \caption{Home Lan - Probabilidades}
+        \label{torta:homelanS}
+    \end{center}
+\end{figure}
+
+Por otro lado la entropía de la fuente $S$ fue de 0.4892 lo que hace que los símbolos emitidos por la fuente $S$ sean muy previsibles. Esto podemos notarlo en la figura~\ref{histo:homelanS} donde observamos que el protocolo con mayor porcentaje de aparición, IPv4,  sea el que menos información aporta a la fuente. La información aportada por este se encuentra por debajo de la entropía de $S$. Como contraste observamos en la figura~\ref{histo:homelanS} que el protocolo EAPOL es el que mas información aporta pero según lo observado en la figura~\ref{torta:homelanS} tiene una probabilidad muy baja lo que hace que no incida en la entropía.
+
+\begin{figure}[ht]
+    \begin{center}
+%        \includegraphics[width=0.5\textwidth]{histo.png}
+        \caption{Home Lan - Información}
+        \label{histo:homelanS}
+    \end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Fuente $S_1$}
 A continuación se adjuntan algunos los resultados obtenidos:
 	
 	
