@@ -107,14 +107,15 @@ En esta sección describiremos brevemente las redes elegidas para realizar las e
 
 \subsection{Home Lan}
 
-Esta medición fue realizada en la Lan de una casa por un intervalo de 2 horas. La misma cuenta con una computadora corriendo un sistema operativo Linux la cual es el router de la Lan y provee a las demas computadoras de acceso a internet ademas de otros servicios de red (proxy, dns, dhcpcd, etc). A la misma se encuentran conectadas mediante un switch 4 computadoras cableadas y 2 access point inalambricos. A estos últimos se encontraban conectados al momento de la medición una notebook y varios celulares. Ademas una de las computadoras cableadas corre una maquina virtual con ip propia independiente y otra de las computadoras cableadas posee otro isp para conectarse a internet por lo que no utiliza a la primera computadora como gateway.
+Esta medición fue realizada en la Lan de una casa por un intervalo de 2 horas. La misma cuenta con una computadora corriendo un sistema operativo Linux la cual es el router de la Lan y provee a las demás computadoras de acceso a internet ademas de otros servicios de red (proxy, dns, dhcpcd, etc). A la misma se encuentran conectadas mediante un switch 4 computadoras cableadas y 2 access point inalambricos. A estos últimos se encontraban conectados al momento de la medición una notebook y varios celulares. Ademas una de las computadoras cableadas corre una maquina virtual con ip propia independiente y otra de las computadoras cableadas posee otro isp para conectarse a internet por lo que no utiliza a la primera computadora como gateway.
 
 \subsection{red 2}
 \subsection{red 3}
 \subsection{red 4}
 
 \section{Resultados y Análisis}
-En esta sección mostraremos y analizaremos los resultados obtenidos en las mediciones realizadas en las distintas redes tanto para la fuente $S$ y $S_1$ descriptas en la sección ~\ref{sec:intro} ~\ref{ssec:fuenteS} y ~\ref{ssec:fuenteS1}. Para cada una de las redes veremos sus protocolos distinguidos, la proporción de paquetes ARP en el trafico de la red y los nodos (representados por ip) distinguidos.
+En esta sección mostraremos y analizaremos los resultados obtenidos en las mediciones realizadas en las distintas redes tanto para la fuente $S$ y $S_1$ descriptas en la sección ~\ref{sec:intro} ~\ref{ssec:fuenteS} y ~\ref{ssec:fuenteS1}. Para cada una de las redes veremos sus protocolos distinguidos, la proporción de paquetes ARP en el trafico de la red y los nodos (representados por ip) distinguidos. Cabe aclarar que para la fuente $S_1$ podemos ver todos los pedidos ``who has'' de ARP ya que todas las maquinas están en el mismo dominio de broadcast pero solo podremos ver las respuestas ``is at'' de aquellas maquinas que se encuentren en igual dominio de colisión (generalmente las conectadas por wireless ya que las cableadas al estar conectadas por switches no tienen colisión y solo el destinatario recibirá la respuesta). 
+
 
 \subsection{Home Lan}
 \subsubsection{Fuente S}
@@ -125,7 +126,7 @@ Los resultados obtenidos para la fuente $S$ fueron:
     \begin{center}
         \begin{tabular}{|c|c|c|}
             \hline
-            \textbf{Protocolo} & \textbf{Informacion} & \textbf{Probabilidad} \\ \hline
+            \textbf{Protocolo} & \textbf{Información} & \textbf{Probabilidad} \\ \hline
             \texttt{EAPOL     }& 12.31       & 0.01\%     \\ \hline
             \texttt{ARP       }& 5.11        & 2.88\%     \\ \hline
             \texttt{IPv6      }& 4.22        & 5.33\%     \\ \hline
@@ -157,53 +158,52 @@ Por otro lado la entropía de la fuente $S$ fue de 0.4892 lo que hace que los s�
     \end{center}
 \end{figure}
 
-
-
-
 \subsubsection{Fuente $S_1$}
-A continuación se adjuntan algunos los resultados obtenidos:
-	
-	
-	\begin{itemize}
- 	 \item \textbf{"Muestra 1" \emph{(captura1.pcap):}}
-			\begin{itemize}
-				\item \texttt{Entropía Fuente S: }				
-				\item \texttt{Entropía Fuente S{\scriptsize 1}: }
-			\end{itemize}
+Para la fuente $S_1$ expondremos las ip de destino, los resultados fueron :
 
- 	 \item \textbf{"Muestra 2" \emph{(captura2.pcap)}:}
-		   \begin{itemize}
-				\item \texttt{Entropía Fuente S: }				
-				\item \texttt{Entropía Fuente S{\scriptsize 1}: }
-		   \end{itemize}
-		   
- 	 \item \textbf{"Muestra 3" \emph{(captura3.pcap)}:}
-		 	 \begin{itemize}
-		 	 	\item \texttt{Entropía Fuente S: }				
-		 	 	\item \texttt{Entropía Fuente S{\scriptsize 1}: }
-		 	 \end{itemize}
-		   
-	 \item \textbf{"Muestra 4" \emph{(captura4.pcap)}:}
-		   \begin{itemize}
-		   	\item \texttt{Entropía Fuente S: }				
-		   	\item \texttt{Entropía Fuente S{\scriptsize 1}: }
-		   \end{itemize}
-		   		   		 	 		   
-	\end{itemize}
+\begin{table}[ht]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Protocolo} & \textbf{Información} & \textbf{Probabilidad} \\ \hline
+            \texttt{192.168.10.10}&7.68        & 0.48\%     \\ \hline
+            \texttt{192.168.10.27}&6.41        & 1.16\%     \\ \hline
+            \texttt{192.168.10.11}&6.30        & 1.26\%     \\ \hline
+            \texttt{192.168.10.13}&5.09        & 2.92\%     \\ \hline
+            \texttt{192.168.10.7}&4.33         & 4.97\%     \\ \hline
+            \texttt{192.168.10.1}&4.00         & 6.23\%     \\ \hline
+            \texttt{192.168.10.4}&2.54         & 17.15\%    \\ \hline
+            \texttt{192.168.10.6}&2.11         & 23.09\%    \\ \hline
+            \texttt{192.168.10.9}&1.22         & 42.69\%    \\ \hline
+        \end{tabular}
+        \caption{Home Lan - Nodos}
+        \label{table:homelanS1}
+    \end{center}
+\end{table}
 
-\subsection{Protocolos y nodos distinguidos y proporción de paquetes ARP}
-	
-\section{Gráficos y análisis}
+Como puede observarse en la figura~\ref{torta:homelanS1} las ip que aparecen con mayor frecuencia como destino en los paquetes ARP son la ``192.168.10.9'' en un 42.69\%, la ``192.168.10.6'' en un 23.09\% y la ``192.168.10.4'' en un 17.15\% por lo que estas serán los nodos distinguidos de la fuente y las que menos información aporten.
 
-A continuación haremos un análisis de cada una de las redes de las cuales capturamos su tráfico. Para ello, haremos uso de distintos gráficos que nos ayudarán a visualizar mejor la información del tráfico en cada red.
+\begin{figure}[ht]
+    \begin{center}
+%        \includegraphics[width=0.5\textwidth]{torta.png}
+        \caption{Home Lan - Probabilidades}
+        \label{torta:homelanS1}
+    \end{center}
+\end{figure} 
 
-\subsection{Analizando tráfico de "captura1" \emph{(captura1.pcap)}}
+La entropía de la fuente $S_1$ fue de 2.25. En la figura~\ref{histo:homelanS1} se observa la información aportada por los distintos nodos y como 2 de los nodos distinguidos quedan por debajo de la entropía de la fuente y el otro apenas por arriba. 
 
-\subsection{Analizando tráfico de "captura2" \emph{(captura2.pcap)}}
+\begin{figure}[ht]
+    \begin{center}
+%        \includegraphics[width=0.5\textwidth]{histo.png}
+        \caption{Home Lan - Información}
+        \label{histo:homelanS1}
+    \end{center}
+\end{figure}
 
-\subsection{Analizando tráfico de "captura3" \emph{(captura3.pcap)}}
+En el análisis de la fuente $S_1$ vemos que ninguno de los 3 nodos distinguidos pertenecen al router de la red, la ip ``192.168.10.1''. De los nodos distinguidos las ip ``192.168.10.6'' y ``192.168.10.4'' se explican ya que la primera es la notebook que realizo la captura en la red y la segunda el la computadora que la controlaba remotamente mediante SSH. La ip ``192.168.10.9'' corresponde a la ip de una consola de video juegos la cual se encontraba apagada al momento de realizar la captura, en la ip ``192.168.10.4'' hay un daemon ejecutandose que se comunica con la consola de video juegos. Al estar esta apagada hay muchos pedidos ``who has 192.168.10.9'' y ninguna respuesta por lo que lso pedidos son reiterados varias veces incrementado su incidencia. 
 
-\subsection{Analizando tráfico de "captura4" \emph{(captura4.pcap)}}
+\section{Conclusión}
 
 \section{Referencias}
 
