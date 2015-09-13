@@ -53,13 +53,13 @@ def monitor_callback_arp(pkt):
 def informacion(diccionario):
     inf = ""
     for simbolo in diccionario.keys():
-	    inf +=  "simbolo : %4s, Informacion : %f\n" % (simbolo, info_simbolo(diccionario, simbolo))
+	    inf +=  "simbolo : %5s, Informacion : %f\n" % (simbolo, info_simbolo(diccionario, simbolo))
     return inf
 
 def probabilidad(diccionario):
     prob = ""
     for simbolo in diccionario.keys():
-        prob += "simbolo : %4s, Probabilidad : %f\n" % (simbolo, prob_simbolo(diccionario, simbolo))
+        prob += "simbolo : %5s, Probabilidad : %f\n" % (simbolo, prob_simbolo(diccionario, simbolo))
     return prob
 
 def valid_file(parser, arg):
@@ -82,6 +82,16 @@ def countdown(t):
         time.sleep(1)
     sys.stdout.write("\rComplete!                           \n\n")
 
+def generate_plot_file(dicc,stype):
+    out = "entropy %f %s\n" % (entropia(dicc),stype)
+    list = []
+    for d in dicc.keys():
+        t =(d,info_simbolo(dicc,d),prob_simbolo(dicc,d))
+        list.append(t)
+    list.sort(key=lambda t: t[2])
+    for l in list:
+        out += "%s %f %f\n" % (l[0],l[1],l[2])
+    return out
 
 parser = argparse.ArgumentParser(description='''Network traffic capture tool.''')
 parser.add_argument('-t', '--time', required=False, type=int, help='max running time in seconds', default=60)
@@ -131,6 +141,9 @@ if args.nodes:
     print probabilidad(ipsdst)
     print "IPs Src - Probabilidad:"
     print probabilidad(ipssrc)
+
+    print "##########PLOT DATA##########"
+    print generate_plot_file(ipsdst,"Ip")
     exit(0)
 
 if offline:
@@ -150,5 +163,6 @@ print "Entropia Fuente HW Type: %f" % entropia(htypes) + '\n'
 print probabilidad(htypes)
 print informacion(htypes)
 
-
+print "##########PLOT DATA##########"
+print generate_plot_file(htypes,"Protocolo")
 
