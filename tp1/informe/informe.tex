@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{textcomp}
+\usepackage{float}
 %\usepackage{hyperref}
 
 \begin{document}
@@ -122,7 +123,7 @@ En esta sección mostraremos y analizaremos los resultados obtenidos en las medi
 
 Los resultados obtenidos para la fuente $S$ fueron:
 
-\begin{table}[ht]
+\begin{table}[H]
     \begin{center}
         \begin{tabular}{|c|c|c|}
             \hline
@@ -140,9 +141,9 @@ Los resultados obtenidos para la fuente $S$ fueron:
 Como puede observarse en la figura~\ref{torta:homelanS} el protocolo mas utilizado es IPv4 en un 91.76\% mientras que IPv6 y ARP solo son utilizados en un 5.33\% y 2.88\% respectivamente. EAPOL (autenticación wireless) no tiene prácticamente incidencia.
 Observamos ademas que el protocolo ARP tiene solo una incidencia del 2.88\% en el trafico total de la fuente lo que hace que el overhead aportado por el mismo no sea significativo. 
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \begin{center}
-%        \includegraphics[width=0.5\textwidth]{torta.png}
+        \includegraphics[width=0.5\textwidth]{plot/homelanS-pie.png}
         \caption{Home Lan - Probabilidades}
         \label{torta:homelanS}
     \end{center}
@@ -150,9 +151,9 @@ Observamos ademas que el protocolo ARP tiene solo una incidencia del 2.88\% en e
 
 Por otro lado la entropía de la fuente $S$ fue de 0.4892 lo que hace que los símbolos emitidos por la fuente $S$ sean muy previsibles. Esto podemos notarlo en la figura~\ref{histo:homelanS} donde observamos que el protocolo con mayor porcentaje de aparición, IPv4,  sea el que menos información aporta a la fuente. La información aportada por este se encuentra por debajo de la entropía de $S$. Como contraste observamos en la figura~\ref{histo:homelanS} que el protocolo EAPOL es el que mas información aporta pero según lo observado en la figura~\ref{torta:homelanS} tiene una probabilidad muy baja lo que hace que no incida en la entropía.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \begin{center}
-%        \includegraphics[width=0.5\textwidth]{histo.png}
+        \includegraphics[width=0.5\textwidth]{plot/homelanS-bar.png}
         \caption{Home Lan - Información}
         \label{histo:homelanS}
     \end{center}
@@ -161,7 +162,7 @@ Por otro lado la entropía de la fuente $S$ fue de 0.4892 lo que hace que los s�
 \subsubsection{Fuente $S_1$}
 Para la fuente $S_1$ expondremos las ip de destino, los resultados fueron :
 
-\begin{table}[ht]
+\begin{table}[H]
     \begin{center}
         \begin{tabular}{|c|c|c|}
             \hline
@@ -183,9 +184,9 @@ Para la fuente $S_1$ expondremos las ip de destino, los resultados fueron :
 
 Como puede observarse en la figura~\ref{torta:homelanS1} las ip que aparecen con mayor frecuencia como destino en los paquetes ARP son la ``192.168.10.9'' en un 42.69\%, la ``192.168.10.6'' en un 23.09\% y la ``192.168.10.4'' en un 17.15\% por lo que estas serán los nodos distinguidos de la fuente y las que menos información aporten.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \begin{center}
-%        \includegraphics[width=0.5\textwidth]{torta.png}
+        \includegraphics[width=0.5\textwidth]{plot/homelanS1-pie.png}
         \caption{Home Lan - Probabilidades}
         \label{torta:homelanS1}
     \end{center}
@@ -193,9 +194,9 @@ Como puede observarse en la figura~\ref{torta:homelanS1} las ip que aparecen con
 
 La entropía de la fuente $S_1$ fue de 2.25. En la figura~\ref{histo:homelanS1} se observa la información aportada por los distintos nodos y como 2 de los nodos distinguidos quedan por debajo de la entropía de la fuente y el otro apenas por arriba. 
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \begin{center}
-%        \includegraphics[width=0.5\textwidth]{histo.png}
+        \includegraphics[width=0.5\textwidth]{plot/homelanS1-bar.png}
         \caption{Home Lan - Información}
         \label{histo:homelanS1}
     \end{center}

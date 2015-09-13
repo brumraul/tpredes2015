@@ -34,11 +34,12 @@ def prob_simbolo(diccionario, key):
 
 def monitor_callback_all(pkt):
     if Ether in pkt:
-#        htype = hex(pkt.type)
-        if pkt.type == 34525:
-            htype = 'IPv6'
-        elif pkt.type < 1536: # if < 0x0600 it's the payload size and not the ethertype
+        if pkt.type < 1536: # if < 0x0600 it's the payload size and not the ethertype
             return
+        elif pkt.type == 34525:
+            htype = 'IPv6'
+        elif pkt.type == 2048:
+            htype = 'IPv4'
         else:
             htype = pkt.payload.name
 	htypes[htype] = htypes.get(htype, 0.0) + 1.0
