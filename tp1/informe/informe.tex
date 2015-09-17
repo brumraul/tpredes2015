@@ -110,7 +110,10 @@ En esta sección describiremos brevemente las redes elegidas para realizar las e
 
 Esta medición fue realizada en la Lan de una casa por un intervalo de 2 horas. La misma cuenta con una computadora corriendo un sistema operativo Linux la cual es el router de la Lan y provee a las demás computadoras de acceso a internet ademas de otros servicios de red (proxy, dns, dhcpcd, etc). A la misma se encuentran conectadas mediante un switch 4 computadoras cableadas y 2 access point inalambricos. A estos últimos se encontraban conectados al momento de la medición una notebook y varios celulares. Ademas una de las computadoras cableadas corre una maquina virtual con ip propia independiente y otra de las computadoras cableadas posee otro isp para conectarse a internet por lo que no utiliza a la primera computadora como gateway.
 
-\subsection{red 2}
+\subsection{Labos Dc}
+
+Esta medición fue realizada en los laboratorios del departamento de computación por un intervalo de 30 minutos. Se desconoce la cantidad de computadoras y celulares conectados al momento de realizar la captura.
+
 \subsection{red 3}
 \subsection{red 4}
 
@@ -202,7 +205,98 @@ La entropía de la fuente $S_1$ fue de 2.25. En la figura~\ref{histo:homelanS1} 
     \end{center}
 \end{figure}
 
-En el análisis de la fuente $S_1$ vemos que ninguno de los 3 nodos distinguidos pertenecen al router de la red, la ip ``192.168.10.1''. De los nodos distinguidos las ip ``192.168.10.6'' y ``192.168.10.4'' se explican ya que la primera es la notebook que realizo la captura en la red y la segunda es la computadora que la controlaba remotamente mediante SSH. La ip ``192.168.10.9'' corresponde a la ip de una consola de video juegos la cual se encontraba apagada al momento de realizar la captura, en la ip ``192.168.10.4'' hay un daemon ejecutándose que se comunica con la consola de video juegos. Al estar esta apagada hay muchos pedidos ``who has 192.168.10.9'' y ninguna respuesta por lo que los pedidos son reiterados varias veces incrementado su incidencia. 
+En el análisis de la fuente $S_1$ vemos que ninguno de los 3 nodos distinguidos pertenecen al router de la red, la ip ``192.168.10.1''. De los nodos distinguidos las ip ``192.168.10.6'' y ``192.168.10.4'' se explican ya que la primera es la notebook que realizo la captura en la red y la segunda es la computadora que la controlaba remotamente mediante SSH. La ip ``192.168.10.9'' corresponde a la ip de una consola de video juegos la cual se encontraba apagada al momento de realizar la captura, en la ip ``192.168.10.4'' hay un daemon ejecutándose que se comunica con la consola de video juegos. Al estar esta apagada hay muchos pedidos ``who has 192.168.10.9'' y ninguna respuesta por lo que los pedidos son reiterados varias veces incrementado su incidencia.
+
+\subsection{Labos Dc}
+\subsubsection{Fuente S}
+
+Los resultados obtenidos para la fuente $S$ fueron:
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Protocolo} & \textbf{Información} & \textbf{Probabilidad} \\ \hline
+            \texttt{ARP       }& 8.092        & 0.37\%     \\ \hline
+            \texttt{IPv4      }& 0.005        & 99.63\%    \\ \hline
+        \end{tabular}
+        \caption{Labos Dc - Protocolos}
+        \label{table:labosDcS}
+    \end{center}
+\end{table} 
+
+Como observamos en la figura~\ref{torta:labosDcS} ampliamente el protocolo mas utilizado es IPv4 en un 99.63\% mientras que ARP solo es utilizado en un 0.37\%. 
+El overhead aportado por que el protocolo ARP en el trafico de la red despreciable.
+Notamos también la ausencia de protocolo para wireless aunque habían celulares conectados a la red durante la captura. Creemos que esto es debido a que la red wifi provista por los labos del Departamento de Computación es abierta y al no estar encriptadas no aparece el protocolo EAPOL utilizado durante la autenticación. 
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{plot/laboDcS-pie.png}
+        \caption{Labos Dc - Probabilidades}
+        \label{torta:labosDcS}
+    \end{center}
+\end{figure}
+
+La entropía de la fuente $S$ fue de 0.034922 lo que hace que los símbolos emitidos por la fuente $S$ sean muy previsibles como podemos notarlo en la figura~\ref{histo:laboDcS} donde observamos que la información aportada por el protocolo IPv4 se encuentra por debajo de la entropía de $S$. El protocolo ARP aporta información muy por arriba de la entropía como se observa en la figura~\ref{histo:laboDcS} pero según lo observado en la figura~\ref{torta:labosDcS} tiene una probabilidad demasiado baja lo que hace que no incida en la entropía.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{plot/laboDcS-bar.png}
+        \caption{Labos Dc - Información}
+        \label{histo:laboDcS}
+    \end{center}
+\end{figure}
+
+\subsubsection{Fuente $S_1$}
+
+Para la fuente $S_1$ expondremos las ip de destino. Dala la cantidad de ips capturadas para facilitar la lectura de los gráficos y tablas expondremos 2 bloques (A yB) en representación de ips de destino que tuvieron igual aporte de información en la captura. Para el caso del bloque A se compone de 19 ip con igual aporte de información y el bloque B de 7 ips. Los resultados fueron :
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Protocolo} & \textbf{Información} & \textbf{Probabilidad} \\ \hline
+            \texttt{A(19 ips)}    &8.40        & 5.60\%     \\ \hline
+            \texttt{B(7 ips)}     &7.40        & 4.13\%     \\ \hline
+            \texttt{10.2.203.144} &6.82        & 0.88\%     \\ \hline
+            \texttt{10.2.202.5}   &6.82        & 0.88\%     \\ \hline
+            \texttt{10.2.202.228} &6.82        & 0.88\%     \\ \hline
+            \texttt{10.2.203.122} &6.40        & 1.17\%     \\ \hline
+            \texttt{10.2.203.117} &6.40        & 1.17\%     \\ \hline
+            \texttt{10.2.203.254} &4.82        & 3.53\%     \\ \hline
+            \texttt{10.2.201.214} &4.23        & 5.30\%     \\ \hline
+            \texttt{10.2.202.132} &4.08        & 5.89\%     \\ \hline
+            \texttt{10.2.200.217} &4.01        & 6.19\%     \\ \hline
+            \texttt{10.2.202.108} &2.33        & 19.76\%     \\ \hline
+            \texttt{10.2.202.100} &2.33        & 19.76\%     \\ \hline
+            \texttt{10.2.202.47}  &2.01        & 24.77\%     \\ \hline   
+        \end{tabular}
+        \caption{Labos Dc - Nodos}
+        \label{table:laboDcS1}
+    \end{center}
+\end{table}
+
+Como puede observarse en la figura~\ref{torta:laboDcS1} las ip que aparecen con mayor frecuencia como destino en los paquetes ARP son la ``10.2.202.47'' en un 24.77\%, la ``10.2.202.100'' en un 19.76\% y la ``10.2.202.108'' en un 19.76\% por lo que estas serán los nodos distinguidos de la fuente y las que menos información aporten.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{plot/laboDcS1-pie.png}
+        \caption{Labos Dc - Probabilidades}
+        \label{torta:laboDcS1}
+    \end{center}
+\end{figure} 
+
+La entropía de la fuente $S_1$ fue de 3.417440. En la figura~\ref{histo:laboDcS1} se observa la información aportada por los distintos nodos y como los 3 nodos distinguidos quedan por debajo de la entropía de la fuente. 
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{plot/laboDcS1-bar.png}
+        \caption{Labos Dc - Información}
+        \label{histo:laboDcS1}
+    \end{center}
+\end{figure}
+
+En el análisis de la fuente $S_1$ vemos que ninguno de los 3 nodos distinguidos pertenecen al router de la red, la ip ``10.2.203.254'' ni tampoco a la ip de la maquina que realizo la captura ``10.2.202.132''. No tenemos información de la red para precisar a que pertencen las ip de los nodos distinguidos.
 
 \section{Conclusión}
 

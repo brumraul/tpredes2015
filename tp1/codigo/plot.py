@@ -35,8 +35,9 @@ with open(args.input) as file:
 
 if args.pie:
     plt.clf()
-    plt.pie(freq, labels=label)
-    plt.legend(loc=(0,0))
+#    plt.pie(freq, labels=label)
+    plt.pie(freq)
+    plt.legend(loc=(0,0),labels=label)
     plt.savefig(output+"-pie"+"."+"png")
 
 if args.bar:
