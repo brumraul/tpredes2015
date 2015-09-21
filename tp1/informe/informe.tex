@@ -117,6 +117,8 @@ Esta medición fue realizada en los laboratorios del departamento de computació
 \subsection{Zona pública (parque)}
 Se realizó una medición en un parque con wifi abierto durante (PREGUNTAR CANTIDAD DE TIEMPO). Debido a que la medición fue realizada en un espacio público se espera que varios dispositivos móbiles como celulares y notebooks se conecten a la misma, sin poder precisar cuántos a priori.
 
+\subsection{Universidad (Universidad de la Matanza)}
+Esta medición se realizó por aproximadamente 10 minutos en la red wifi de la Universidad de La Matanza. Es una red abierta y desconocemos la estructura de ella.
 
 \subsection{red 4}
 
@@ -414,6 +416,96 @@ La entropía de la fuente fue de $5.757719$, lo que indica que la fuente tiene u
 
 ¿COMO PUEDEN HABER IPS DEL TIPO 169.254.188.151 Y 10.248.64.254 EN LA MISMA CAPTURA DE LA MISMA RED?
 
+\subsection{Universidad de La Matanza}
+\subsubsection{Fuente S}
+
+Los resultados obtenidos para la fuente $S$ fueron:
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Protocolo} & \textbf{Información} & \textbf{Probabilidad} \\ \hline
+            \texttt{IPv6      }& 6.753        & 0.009\%     \\ \hline
+            \texttt{ARP       }& 1.269        & 0.415\%     \\ \hline
+	    \texttt{IPv4      }& 0.796        & 0.576\%     \\ \hline
+        \end{tabular}
+        \caption{Universidad de La Matanza - Protocolos}
+        \label{table:universidadLMS}
+    \end{center}
+\end{table} 
+
+//TODO: explicar esta tabla.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{plot/facultadS-pie.png}
+        \caption{Universidad de La Matanza - Probabilidades}
+        \label{torta:universidadLMS}
+    \end{center}
+\end{figure}
+
+//TODO: completar.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{plot/facultadS-bar.png}
+        \caption{Universidad de La Matanza - Información}
+        \label{histo:universidadLMS}
+    \end{center}
+\end{figure}
+
+//TODO: completar.
+
+\subsubsection{Fuente $S_1$}
+
+//TODO: Explicar agrupación.
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Protocolo} & \textbf{Información} & \textbf{Probabilidad} \\ \hline
+            \texttt{A(428 ips)}   &11.27       & 0.0005\%     \\ \hline
+            \texttt{B(92 ips)}    &9.48        & 0.0014\%     \\ \hline
+            \texttt{C(56 ips)}    &8.48        & 0.0029\%     \\ \hline
+	    \texttt{10.5.81.167}  &8.00        & 0.0039\%     \\ \hline
+	    \texttt{10.5.84.65}   &7.93        & 0.0041\%     \\ \hline
+            \texttt{D(25 ips)}    &7.65        & 0.0050\%     \\ \hline
+	    \texttt{10.5.83.154}  &7.00        & 0.0079\%     \\ \hline
+	    \texttt{10.5.78.34}   &6.94        & 0.0081\%     \\ \hline
+	    \texttt{10.5.77.136}  &6.87        & 0.0086\%     \\ \hline
+	    \texttt{10.5.84.63}   &6.58        & 0.0105\%     \\ \hline
+	    \texttt{10.5.70.216}  &6.12        & 0.0144\%     \\ \hline
+	    \texttt{10.5.200.13}  &5.91        & 0.0166\%     \\ \hline
+	    \texttt{10.5.0.1}     &5.53        & 0.0216\%     \\ \hline
+        \end{tabular}
+        \caption{Universidad de La Matanza - Nodos}
+        \label{table:universidadLMS1}
+    \end{center}
+\end{table}
+
+//TODO: explicar tabla y graficos.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{plot/facultadS1_v3-pie.png}
+        \caption{Universidad de La Matanza - Probabilidades}
+        \label{torta:universidadLMS1}
+    \end{center}
+\end{figure} 
+
+//TODO: explicar entropia
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{plot/facultadS1_v3-bar.png}
+        \caption{Universidad de La Matanza - Información}
+        \label{histo:universidadLMS1}
+    \end{center}
+\end{figure}
+
+//TODO: analisis
 
 \section{Conclusión}
 En este trabajo se analizaron 4 redes distintas desde el punto de vista de la teoría de la información. Este enfoque nos permitió distinguir y cuantificar la importancia de distintos entes dentro de las redes , ya sean protocolos y su uso relativo en las redes LAN analizadas o nodos que las conforman. (FALTA UNA RED PARA LAS CONCLUSIONES)
