@@ -3,6 +3,7 @@ import argparse
 import os
 import sys
 import matplotlib.pyplot as plt
+from matplotlib import cm
 import numpy as np
 
 def valid_file(parser, arg):
@@ -35,9 +36,10 @@ with open(args.input) as file:
 
 if args.pie:
     plt.clf()
-#    plt.pie(freq, labels=label)
-    plt.pie(freq)
-    plt.legend(loc=(0,0),labels=label)
+    cn = len(freq)
+    cs = cm.Set1(np.arange(cn)/(cn*1.0))
+    plt.pie(freq, colors=cs, labels=label)
+#    plt.legend(loc=(0,0),labels=label)
     plt.savefig(output+"-pie"+"."+"png")
 
 if args.bar:
