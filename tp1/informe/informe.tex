@@ -120,8 +120,6 @@ Se realizó una medición en un parque con wifi abierto durante (PREGUNTAR CANTI
 \subsection{Universidad (Universidad de la Matanza)}
 Esta medición se realizó por aproximadamente 10 minutos en la red wifi de la Universidad de La Matanza. Es una red abierta y desconocemos la estructura de ella.
 
-\subsection{red 4}
-
 \section{Resultados y Análisis}
 En esta sección mostraremos y analizaremos los resultados obtenidos en las mediciones realizadas en las distintas redes tanto para la fuente $S$ y $S_1$ descriptas en la sección ~\ref{sec:intro} ~\ref{ssec:fuenteS} y ~\ref{ssec:fuenteS1}. Para cada una de las redes veremos sus protocolos distinguidos, la proporción de paquetes ARP en el trafico de la red y los nodos (representados por ip) distinguidos. Cabe aclarar que para la fuente $S_1$ podemos ver todos los pedidos ``who has'' de ARP ya que todas las maquinas están en el mismo dominio de broadcast pero solo podremos ver las respuestas ``is at'' de aquellas maquinas que se encuentren en igual dominio de colisión (generalmente las conectadas por wireless ya que las cableadas al estar conectadas por switches no tienen colisión y solo el destinatario recibirá la respuesta). 
 
@@ -435,7 +433,7 @@ Los resultados obtenidos para la fuente $S$ fueron:
     \end{center}
 \end{table} 
 
-//TODO: explicar esta tabla.
+Se observa en la figura~\ref{torta:universidadLMS} que los protocolos más utilizados son IPv4 en un 57.60\% y ARP con un 41.50\%, el uso del protocolo IPv6 es de apenas 0.9%. La cantidad de mensajes ARP es bastante elevado para esta red, creemos que esto podría indicar una gran variabilidad de los componentes conectados (dispositivos que se conectan por poco tiempo). El uso despreciable del protocolo IPv6 creemos que podría justificarse por un tema de configuración propia de la red.
 
 \begin{figure}[H]
     \begin{center}
@@ -445,7 +443,7 @@ Los resultados obtenidos para la fuente $S$ fueron:
     \end{center}
 \end{figure}
 
-//TODO: completar.
+La entropía de la fuente $S$ fue de 1.047737 lo que hace que los símbolos emitidos por la fuente $S$ sean muy imprevisibles como podemos notarlo en la figura~\ref{histo:universidadLMS} donde observamos que la información aportada por el protocolo IPv4 se parece a la del protocolo ARP ambos muy cerca de la entropía de $S$. El protocolo IPv6 aporta información muy por arriba de la entropía según la figura~\ref{histo:universidadLMS}, pero según lo observado en la figura~\ref{torta:universidadLMS} tiene una probabilidad demasiado baja lo que hace que no incida en la entropía.
 
 \begin{figure}[H]
     \begin{center}
@@ -455,11 +453,9 @@ Los resultados obtenidos para la fuente $S$ fueron:
     \end{center}
 \end{figure}
 
-//TODO: completar.
-
 \subsubsection{Fuente $S_1$}
 
-//TODO: Explicar agrupación.
+Para la fuente $S_1$ expondremos las ip de destino. Dada la cantidad de ips capturadas para facilitar la lectura de los gráficos y tablas expondremos varios bloques de (A hasta D) en representación de ips de destino que tuvieron un aporte de información parecido en la captura. Como había demasiadas ips, para las que estaban muy por encima de la entropía se utilizo un promedio para darle un valor para el gráfico. Los resultados fueron :
 
 \begin{table}[H]
     \begin{center}
@@ -485,7 +481,7 @@ Los resultados obtenidos para la fuente $S$ fueron:
     \end{center}
 \end{table}
 
-//TODO: explicar tabla y graficos.
+Como puede observarse en la figura~\ref{torta:universidadLMS1} las ip que aparecen con mayor frecuencia como destino en los paquetes ARP son la ``10.5.0.1'' en un 2.16\%, la ``10.5.200.13'' en un 1.66\%, la ``10.5.70.216'' en un 1.44\% y la ``10.5.84.63'' en un 1.05\% por lo que estas serán los nodos distinguidos de la fuente y las que menos información aporten.
 
 \begin{figure}[H]
     \begin{center}
@@ -495,7 +491,7 @@ Los resultados obtenidos para la fuente $S$ fueron:
     \end{center}
 \end{figure} 
 
-//TODO: explicar entropia
+La entropía de la fuente $S_1$ fue de 7.951183. En la figura~\ref{histo:universidadLMS1} y la figura ~\ref{torta:universidadLMS1} se observa la información aportada por los distintos nodos y como los 4 nodos distinguidos quedan por debajo de la entropía de la fuente. En este caso había muchas ips por debajo de la entropía (casí 30 ips), así que tomamos como punto de corte los que tengan una probabilidad mayor a 1%.
 
 \begin{figure}[H]
     \begin{center}
@@ -505,7 +501,7 @@ Los resultados obtenidos para la fuente $S$ fueron:
     \end{center}
 \end{figure}
 
-//TODO: analisis
+En el análisis de la fuente $S_1$ vemos que la ip ``10.5.0.1'' podría corresponderse algún router y los otros 3 nodos no estamos suficiente información sobre la red para saber cual es el rol que cumplen.
 
 \section{Conclusión}
 En este trabajo se analizaron 4 redes distintas desde el punto de vista de la teoría de la información. Este enfoque nos permitió distinguir y cuantificar la importancia de distintos entes dentro de las redes , ya sean protocolos y su uso relativo en las redes LAN analizadas o nodos que las conforman. (FALTA UNA RED PARA LAS CONCLUSIONES)
