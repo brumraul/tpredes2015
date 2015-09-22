@@ -306,7 +306,7 @@ En el análisis de la fuente $S_1$ vemos que ninguno de los nodos distinguidos p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Zona pública (parque)}
+\subsection{Parque}
 \subsubsection{Fuente S}
 
 Los resultados obtenidos para la fuente $S$ fueron:
@@ -320,7 +320,7 @@ Los resultados obtenidos para la fuente $S$ fueron:
             \texttt{ARP       }& 1.646        & 31.95\%     \\ \hline
             \texttt{IPv4      }& 1.373        & 38.59\%    \\ \hline
         \end{tabular}
-        \caption{Zona Pública (parque) - Protocolos}
+        \caption{Parque - Protocolos}
         \label{table:parqueS}
     \end{center}
 \end{table} 
@@ -330,7 +330,7 @@ Podemos notar en la figura~\ref{torta:parqueS} que el protocolo más utilizado e
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.5\textwidth]{plot/parqueS-pie.png}
-        \caption{Zona Pública (parque) - Probabilidades}
+        \caption{Parque - Probabilidades}
         \label{torta:parqueS}
     \end{center}
 \end{figure}
@@ -340,7 +340,7 @@ En cuanto a la entropía de la fuente $S$, fue de $1.575466$, lo que nos dice qu
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.5\textwidth]{plot/parqueS-bar.png}
-        \caption{Zona Pública (parque) - Informacion}
+        \caption{Parque - Informacion}
         \label{histo:parqueS}
     \end{center}
 \end{figure}
@@ -374,7 +374,7 @@ Para la fuente $S_1$ expondremos las IPs de destino. Dada la cantidad de IPs cap
             \texttt{10.249.107.249} &3.278075         &10.30\%     \\ \hline 
             \texttt{10.250.127.254} &2.422862         &18.64\%     \\ \hline
         \end{tabular}
-        \caption{Zona pública (parque) - Nodos}
+        \caption{Parque - Nodos}
         \label{table:parqueS1}
     \end{center}
 \end{table}
@@ -501,8 +501,12 @@ La entropía de la fuente $S_1$ fue de 7.951183. En la figura~\ref{histo:univers
 En el análisis de la fuente $S_1$ vemos que la IP ``10.5.0.1'' podría corresponderse a algún router y de los otros tres nodos no disponemos de suficiente información sobre la red para saber cuál es el rol que cumplen.
 
 \section{Conclusión}
-En este trabajo se analizaron 4 redes distintas desde el punto de vista de la teoría de la información. Este enfoque nos permitió distinguir y cuantificar la importancia de distintos entes dentro de las redes , ya sean protocolos y su uso relativo en las redes LAN analizadas o nodos que las conforman. (FALTA UNA RED PARA LAS CONCLUSIONES)
+\par En este trabajo se analizaron 4 redes distintas desde el punto de vista de la teoría de la información. Este enfoque nos permitió distinguir y cuantificar la importancia de distintos entes dentro de las redes , ya sean protocolos y su uso relativo en las redes LAN analizadas o nodos que las conforman. \\ 
+ En cuanto a la fuente S, se notó que en todas las redes el protocolo más usado fue IPv4. Otro patrón interesante descubierto es que las redes en donde hay menor cantidad de tráfico de personas, es decir, dispositivos entrando y saliendo del alcance de la red, parecen tener una menor entropía. En efecto, las redes en las cuáles se midió la menor entropía fueron Labos Dc y la red hogareña, con $0.034922$ y $0.4892$ respectivamente. \\ 
+ En cuanto a la fuente $S_1$ se confirmó que hay una correlación entre ser o no una red controlada y la entropía medida. El patrón es claro al enumerar las redes con sus entropías: red hogareña ($2.25$), Labos Dc ($3.417440$), Parque ($5.757719$), Universidad La Matanza ($7.951183$); donde las primeras dos son controladas y las últimas dos no lo son. \\
+ Es interesante observar que la entropía de la fuente S parece ser menor que la de $S1$, para cada red. Esto indica que es más predecible el protocolo de un paquete que la dirección destino del mismo. Esto se esperaba, ya que, como ya se mencionó, en todas las capturas, el protocolo IPv4 prevaleció entre los demás (en mayor o menor medida).
 
+ 
 
 \section{Referencias}
 
