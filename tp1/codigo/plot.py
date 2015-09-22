@@ -5,7 +5,7 @@ import sys
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import numpy as np
-#plt.rcParams['font.size'] = 9.0
+#plt.rcParams['font.size'] = 7.0
 
 def valid_file(parser, arg):
     if not os.path.isfile(arg):

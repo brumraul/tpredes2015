@@ -441,37 +441,48 @@ La entropía de la fuente $S$ fue de 1.047737 lo que hace que los símbolos emit
 
 \subsubsection{Fuente $S_1$}
 
-Para la fuente $S_1$ expondremos las ip de destino. Dada la cantidad de ips capturadas para facilitar la lectura de los gráficos y tablas expondremos varios bloques de (A hasta D) en representación de ips de destino que tuvieron un aporte de información parecido en la captura. Como había demasiadas ips, para las que estaban muy por encima de la entropía se utilizo un promedio para darle un valor para el gráfico. Los resultados fueron :
+Para la fuente $S_1$ expondremos las ip de destino. Dada la cantidad de ips capturadas para facilitar la lectura de los gráficos y tablas expondremos varios bloques de (A hasta I) en representación de ips de destino que tuvieron un aporte de información parecido en la captura. Como había demasiadas ips, para las que estaban muy por encima de la entropía se utilizo un promedio para darle un valor para el gráfico. Los resultados fueron :
 
 \begin{table}[H]
     \begin{center}
         \begin{tabular}{|c|c|c|}
             \hline
             \textbf{Protocolo} & \textbf{Información} & \textbf{Probabilidad} \\ \hline
-            \texttt{A(428 ips)}   &11.27       & 0.0005\%     \\ \hline
-            \texttt{B(92 ips)}    &9.48        & 0.0014\%     \\ \hline
-            \texttt{C(56 ips)}    &8.48        & 0.0029\%     \\ \hline
-	    \texttt{10.5.81.167}  &8.00        & 0.0039\%     \\ \hline
-	    \texttt{10.5.84.65}   &7.93        & 0.0041\%     \\ \hline
-            \texttt{D(25 ips)}    &7.65        & 0.0050\%     \\ \hline
-	    \texttt{10.5.83.154}  &7.00        & 0.0079\%     \\ \hline
-	    \texttt{10.5.78.34}   &6.94        & 0.0081\%     \\ \hline
-	    \texttt{10.5.77.136}  &6.87        & 0.0086\%     \\ \hline
-	    \texttt{10.5.84.63}   &6.58        & 0.0105\%     \\ \hline
-	    \texttt{10.5.70.216}  &6.12        & 0.0144\%     \\ \hline
-	    \texttt{10.5.200.13}  &5.91        & 0.0166\%     \\ \hline
-	    \texttt{10.5.0.1}     &5.53        & 0.0216\%     \\ \hline
+            \texttt{A(131 ips)}   &13.450309       & 1.16\%     \\ \hline
+            \texttt{B(74 ips)}    &12.450309       & 1.32\%     \\ \hline
+            \texttt{C(155 ips)}   &11.540077       & 5.31\%     \\ \hline
+	        \texttt{D(77 ips)}    &10.565611       & 5.16\%     \\ \hline
+	        \texttt{E(103 ips)}   &9.564986        & 13.86\%    \\ \hline
+            \texttt{F(38 ips)}    &8.755480        & 8.83\%     \\ \hline
+    	    \texttt{G(38 ips)}    &8.271055        & 12.36\%    \\ \hline
+	        \texttt{H(28 ips)}    &7.732110        & 13.23\%    \\ \hline
+	        \texttt{I(20 ips)}    &7.272395        & 12.99\%    \\ \hline
+            \texttt{10.5.83.154}  &6.990878        & 0.78\%    \\ \hline
+            \texttt{10.5.73.140}  &6.974576        & 0.79\%    \\ \hline
+            \texttt{10.5.78.34}   &6.942515        & 0.81\%    \\ \hline
+            \texttt{169.254.255.255} &6.895720     & 0.83\%    \\ \hline
+            \texttt{10.5.77.136}  &6.865347        & 0.85\%    \\ \hline
+            \texttt{10.5.82.0}    &6.668949        & 0.98\%    \\ \hline
+            \texttt{10.5.84.63}   &6.579944        & 1.04\%    \\ \hline
+            \texttt{10.5.70.239}  &6.543419        & 1.07\%    \\ \hline
+            \texttt{10.5.70.216}  &6.119392        & 1.43\%    \\ \hline
+            \texttt{10.5.80.111}  &6.024044        & 1.53\%    \\ \hline
+            \texttt{10.5.200.13}  &5.911150        & 1.66\%    \\ \hline
+            \texttt{10.5.77.177}  &5.784973        & 1.81\%    \\ \hline
+            \texttt{10.5.0.1}     &5.531446        & 2.16\%    \\ \hline
+            \texttt{10.5.80.17}   &5.455956        & 2.27\%    \\ \hline
+            \texttt{10.5.103.253} &3.707158        & 7.65\%    \\ \hline    
         \end{tabular}
         \caption{Universidad de La Matanza - Nodos}
         \label{table:universidadLMS1}
     \end{center}
 \end{table}
 
-Como puede observarse en la figura~\ref{torta:universidadLMS1} las ip que aparecen con mayor frecuencia como destino en los paquetes ARP son la ``10.5.0.1'' en un 2.16\%, la ``10.5.200.13'' en un 1.66\%, la ``10.5.70.216'' en un 1.44\% y la ``10.5.84.63'' en un 1.05\% por lo que estas serán los nodos distinguidos de la fuente y las que menos información aporten.
+Como puede observarse en la figura~\ref{torta:universidadLMS1} las ip que aparecen con mayor frecuencia como destino en los paquetes ARP son la ``10.5.103.253'' en un 7.65\%, la ``10.5.80.17'' en un 2.27\%, ``10.5.0.1'' en un 2.16\%, la ``10.5.77.177'' en un 1.81\%, la ``10.5.200.13'' en un 1.66\%, la ``10.5.70.216'' en un 1.43\% y varias mas, por lo que estas serán los nodos distinguidos de la fuente y las que menos información aporten.
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=0.5\textwidth]{plot/facultadS1_v3-pie.png}
+        \includegraphics[width=0.5\textwidth]{plot/facultadS1-pie.png}
         \caption{Universidad de La Matanza - Probabilidades}
         \label{torta:universidadLMS1}
     \end{center}
@@ -481,7 +492,7 @@ La entropía de la fuente $S_1$ fue de 7.951183. En la figura~\ref{histo:univers
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=0.5\textwidth]{plot/facultadS1_v3-bar.png}
+        \includegraphics[width=0.5\textwidth]{plot/facultadS1-bar.png}
         \caption{Universidad de La Matanza - Información}
         \label{histo:universidadLMS1}
     \end{center}
