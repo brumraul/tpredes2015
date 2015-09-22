@@ -5,6 +5,7 @@ import sys
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import numpy as np
+#plt.rcParams['font.size'] = 9.0
 
 def valid_file(parser, arg):
     if not os.path.isfile(arg):
@@ -38,7 +39,8 @@ if args.pie:
     plt.clf()
     cn = len(freq)
     cs = cm.Set1(np.arange(cn)/(cn*1.0))
-    plt.pie(freq, colors=cs, labels=label)
+    angle = 0
+    plt.pie(freq, colors=cs, labels=label, startangle=angle)
 #    plt.legend(loc=(0,0),labels=label)
     plt.savefig(output+"-pie"+"."+"png")
 
