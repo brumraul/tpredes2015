@@ -107,9 +107,14 @@ Para analizar la entropía de la red en base a los paquetes ARP observados reali
 
 En esta sección describiremos brevemente las redes elegidas para realizar las escuchas mediante las herramientas indicadas en el enunciado del trabajo práctico.
 
+\subsection{Hipótesis}
+Basándonos en la Teoría de la Información, propondremos distintas hipótesis a probar o descartar en función de los experimentos que se expondrán a continuación.\\
+Nuestra primer hipótesis será sobre los valores de entropía resultantes de la fuente S y S{\scriptsize 1}, que se presentaron anteriormente, respecto a las capturas de redes controladas y redes abiertas. Dado que para redes controladas los paquetes se envían entre dispositivos en su mayoría conocidos entre sí, y los cambios que puede sufrir la red son mucho menores que para una red abierta, se espera que los valores de entropía de las fuentes sea menor que para las capturas de redes abiertas. Está hipótesis se basa en el hecho de que el conocimiento planteado sobre la red y sus paquetes, debería disminuir la incertidumbre sobre los valores resultantes de la fuente. Si disminuye la incertidumbre, disminuye la entropía.\\
+Plantearemos como segunda hipótesis que los valores de entropía de la fuente S serán menores a los valores de entropía de la fuente S{\scriptsize 1}. Nos basamos para esta hipótesis en el hecho de que la fuente S tendrá menos símbolos respecto a la fuente S{\scriptsize 1} para los paquetes enviados por las redes. Dado que la fuente S{\scriptsize 1} presentará una cantidad mayor considerable de símbolos, podríamos decir que la proporción de aparición de estos estará más distribuida. Si considerando la definición de información, es válido plantear que el valor medio ponderado de la cantidad de información por símbolo será mayor en la fuente S{\scriptsize 1} que en la fuente S. Es decir, la entropía de la fuente S{\scriptsize 1} será mayor a la entropía de la fuente S. Otra definición que nos puede ayudar con el planteo de este hipótesis, es que la entropía de la fuente es menor o igual a la longitud de la fuente, entonces el valor de la cota para la entropía de S es menor respecto de S{\scriptsize 1}.
+
 \subsection{Home LAN}
 
-Esta medición fue realizada en la Lan de una casa por un intervalo de 2 horas. La misma cuenta con una computadora corriendo un sistema operativo Linux la cual es el router de la LAN y provee a las demás computadoras de acceso a internet además de otros servicios de red (proxy, DNS, DHCPCD, etc). A la misma se encuentran conectadas mediante un switch 4 computadoras cableadas y 2 access point inalámbricos. A estos últimos se encontraban conectados al momento de la medición una notebook y varios celulares. Además una de las computadoras cableadas corre una máquina virtual con IP propia independiente y otra de las computadoras cableadas posee otro ISP para conectarse a internet por lo que no utiliza a la primera computadora como gateway.
+Esta medición fue realizada en la LAN de una casa por un intervalo de 2 horas. La misma cuenta con una computadora corriendo un sistema operativo Linux la cual es el router de la LAN y provee a las demás computadoras de acceso a internet además de otros servicios de red (proxy, DNS, DHCPCD, etc). A la misma se encuentran conectadas mediante un switch 4 computadoras cableadas y 2 access point inalámbricos. A estos últimos se encontraban conectados al momento de la medición una notebook y varios celulares. Además una de las computadoras cableadas corre una máquina virtual con IP propia independiente y otra de las computadoras cableadas posee otro ISP para conectarse a internet por lo que no utiliza a la primera computadora como gateway.
 
 \subsection{Labos DC}
 
@@ -503,12 +508,17 @@ En el análisis de la fuente $S_1$ vemos que la IP ``10.5.0.1'' podría correspo
 
 \section{Conclusión}
 \par En este trabajo se analizaron 4 redes distintas desde el punto de vista de la teoría de la información. Este enfoque nos permitió distinguir y cuantificar la importancia de distintos entes dentro de las redes , ya sean protocolos y su uso relativo en las redes LAN analizadas o nodos que las conforman. \\ 
- En cuanto a la fuente S, se notó que en todas las redes el protocolo más usado fue IPv4. Otro patrón interesante descubierto es que las redes en donde hay menor cantidad de tráfico de personas, es decir, dispositivos entrando y saliendo del alcance de la red, parecen tener una menor entropía. En efecto, las redes en las cuáles se midió la menor entropía fueron Labos Dc y la red hogareña, con $0.034922$ y $0.4892$ respectivamente. \\ 
- En cuanto a la fuente $S_1$ se confirmó que hay una correlación entre ser o no una red controlada y la entropía medida. El patrón es claro al enumerar las redes con sus entropías: red hogareña ($2.25$), Labos Dc ($3.417440$), Parque ($5.757719$), Universidad La Matanza ($7.951183$); donde las primeras dos son controladas y las últimas dos no lo son. \\
- Es interesante observar que la entropía de la fuente S parece ser menor que la de $S1$, para cada red. Esto indica que es más predecible el protocolo de un paquete que la dirección destino del mismo. Esto se esperaba, ya que, como ya se mencionó, en todas las capturas, el protocolo IPv4 prevaleció entre los demás (en mayor o menor medida).
-
+ En cuanto a la fuente S, se notó que en todas las redes el protocolo más usado fue IPv4. Otro patrón interesante descubierto es que las redes en donde hay menor cantidad de tráfico de personas, es decir, dispositivos entrando y saliendo del alcance de la red, parecen tener una menor entropía. En efecto, las redes en las cuáles se midió la menor entropía fueron Labos DC y la red hogareña, con $0.034922$ y $0.4892$ respectivamente. \\ 
+ En cuanto a la fuente $S_1$ se confirmó que hay una correlación entre ser o no una red controlada y la entropía medida. El patrón es claro al enumerar las redes con sus entropías: red hogareña ($2.25$), Labos DC ($3.417440$), Parque ($5.757719$), Universidad La Matanza ($7.951183$); donde las primeras dos son controladas y las últimas dos no lo son. \\
+ Es interesante observar que la entropía de la fuente S parece ser menor que la de $S_1$, para cada red. Esto indica que es más predecible el protocolo de un paquete que la dirección destino del mismo. Esto se esperaba, ya que, como ya se mencionó, en todas las capturas, el protocolo IPv4 prevaleció entre los demás (en mayor o menor medida).
+Por último, concluímos como se puede ver, que los experimentos realizados probaron las hipótesis planteadas previamente basadas en la Teoría de la Información. 
  
 
 \section{Referencias}
+	\begin{itemize}
+		\item N. Abramson,
+		Teoría de la Información y Codificación
+		5ta edición
+	\end{itemize}
 
 \end{document}
