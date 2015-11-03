@@ -43,20 +43,23 @@ class TraceRoute:
                     
         if self.hosts[pos]:
             best = self.hosts[pos].most_common(1)[0][0]
-            return (best, median(self.times[pos][best]))
+            return (best, self.times[pos][best])
         else:
-            return ('*', 0)
+            return ('*', [0])
 
     def trace(self):
 #        print('Traceroute to {}({})'.format(self.dst, self.ip))
         screen.addstr(1,1,'Traceroute to {}({})'.format(self.dst, self.ip))
+        screen.addstr(3,1,'TTL',curses.A_BOLD)
+        screen.addstr(3,5,'HOST',curses.A_BOLD)
+        screen.addstr(3,52,'IP',curses.A_BOLD)
+        screen.addstr(3,68,'RTT',curses.A_BOLD)
         
         for t in xrange(self.tries):
-            print "\n"
             distance = -1
             nodes = []
             for ttl in range(1, self.hops + 1):
-                ip, rtt = self.distance(ttl)
+                ip, rtt_list = self.distance(ttl)
                 host = '*'
     
                 if ip != '*':
@@ -65,12 +68,13 @@ class TraceRoute:
                     except socket.herror:
                         host = ip
 
+                rtt = median(rtt_list)
                 nodes += [{'ip': ip, 'host': host, 'rtt': rtt}]
 #                print('{} {} ({}) {:.3f} ms'.format(ttl, host, ip, rtt))
-                screen.addstr(ttl+2,1,'{}'.format(ttl))
-                screen.addstr(ttl+2,4,host)
-                screen.addstr(ttl+2,52,ip)
-                screen.addstr(ttl+2,68,'{:.3f} ms'.format(rtt))
+                screen.addstr(ttl+3,1,'{}'.format(ttl))
+                screen.addstr(ttl+3,5,host)
+                screen.addstr(ttl+3,52,ip)
+                screen.addstr(ttl+3,68,'{:.3f} ms'.format(rtt))
                 screen.refresh()
 
                 if ip == self.ip:
@@ -78,28 +82,80 @@ class TraceRoute:
                     break
 
         if distance != -1:
-            screen.addstr(distance+4,1,'Host reached in {} hops'.format(distance))
+            screen.addstr(distance+5,1,'Host reached in {} hops'.format(distance))
         else:
-            screen.addstr(distance+4,1,'Host not reached in {} hops'.format(self.hops))
+            screen.addstr(distance+5,1,'Host not reached in {} hops'.format(self.hops))
         screen.refresh
         return (distance, nodes)
 
+    def trace_stat(self):
+        screen.addstr(1,1,'Traceroute to {}({})'.format(self.dst, self.ip))
+        screen.addstr(3,1,'TTL',curses.A_BOLD)
+        screen.addstr(3,6,'IP',curses.A_BOLD)
+        screen.addstr(3,23,'RTT',curses.A_BOLD)
+        screen.addstr(3,35,'E(RTT)',curses.A_BOLD)
+        screen.addstr(3,47,'S(RTT)',curses.A_BOLD)
+        screen.addstr(3,59,'D(RTT)',curses.A_BOLD)
+
+        for t in xrange(self.tries):
+            distance = -1
+            nodes = []
+            rtt_ant = 0
+            for ttl in range(1, self.hops + 1):
+                ip, rtt_list = self.distance(ttl)
+                host = '*'
+    
+                if ip != '*':
+                    try:
+                        host = socket.gethostbyaddr(ip)[0]
+                    except socket.herror:
+                        host = ip
+
+                rtt = median(rtt_list)
+                mean = numpy.mean(rtt_list)
+                std = numpy.std(rtt_list)
+                delta = mean - rtt_ant
+                rtt_ant = mean
+                
+                nodes += [{'ip': ip, 'rtt': rtt, 'mean': mean, 'std':std}]
+                screen.addstr(ttl+3,1,'{}'.format(ttl))
+                screen.addstr(ttl+3,6,ip)
+                screen.addstr(ttl+3,23,'{:.3f} ms'.format(rtt))
+                screen.addstr(ttl+3,35,'{:.3f} ms'.format(mean))
+                screen.addstr(ttl+3,47,'{:.3f} ms'.format(std))
+                screen.addstr(ttl+3,59,'{:.3f} ms'.format(delta))
+                screen.refresh()
+
+                if ip == self.ip:
+                    distance = ttl
+                    break
+
 
 parser = argparse.ArgumentParser(description="Traceroute to given domain name")
-parser.add_argument('-n', '--name', required=True, type=str, help='domain name')
-parser.add_argument('-t', '--tries', required=False, type=int, help='number of runs, omit for continuos output')
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument('-t', '--trace', action="store_true", help="run normal traceroute")
+group.add_argument('-s', '--stat', action="store_true", help="run traceroute with statistics")
+parser.add_argument('-d', '--dom', required=True, type=str, help='domain name')
+parser.add_argument('-r', '--runs', required=False, type=int, help='number of runs, omit for continuos output')
 args = parser.parse_args()
 
-if args.tries:
-    t=args.tries
+if args.runs:
+    t=args.runs
 else:
     t=9999
 
-screen = curses.initscr()
 try:
-	screen.border(0)
+    screen = curses.initscr()
+    screen.border(0)
+    route = TraceRoute(args.dom,t)
+    
+    if args.trace:
+        route.trace()
 
-	TraceRoute(args.name,t).trace()
-	screen.getch()
+    if args.stat:
+        route.trace_stat()
+
+    screen.getch()  
+
 finally:
-	curses.endwin()
+    curses.endwin()
