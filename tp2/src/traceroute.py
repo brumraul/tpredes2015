@@ -6,6 +6,7 @@ import scapy.all as scp
 import socket
 from collections import Counter
 import numpy
+import curses
 
 ICMP_ECHO_REPLY = 0
 ICMP_TIME_EXCEEDED = 11
@@ -47,7 +48,9 @@ class TraceRoute:
             return ('*', 0)
 
     def trace(self):
-        print('Traceroute to {}({})'.format(self.dst, self.ip))
+#        print('Traceroute to {}({})'.format(self.dst, self.ip))
+        screen.addstr(1,1,'Traceroute to {}({})'.format(self.dst, self.ip))
+        
         for t in xrange(self.tries):
             print "\n"
             distance = -1
@@ -63,17 +66,22 @@ class TraceRoute:
                         host = ip
 
                 nodes += [{'ip': ip, 'host': host, 'rtt': rtt}]
-                print('{} {} ({}) {:.3f} ms'.format(ttl, host, ip, rtt))
+#                print('{} {} ({}) {:.3f} ms'.format(ttl, host, ip, rtt))
+                screen.addstr(ttl+2,1,'{}'.format(ttl))
+                screen.addstr(ttl+2,4,host)
+                screen.addstr(ttl+2,52,ip)
+                screen.addstr(ttl+2,68,'{:.3f} ms'.format(rtt))
+                screen.refresh()
 
                 if ip == self.ip:
                     distance = ttl
                     break
-        print "\n"
-        if distance != -1:
-            print('Host reached in {} hops'.format(distance))
-        else:
-            print('Host not reached in {} hops'.format(self.hops))
 
+        if distance != -1:
+            screen.addstr(distance+4,1,'Host reached in {} hops'.format(distance))
+        else:
+            screen.addstr(distance+4,1,'Host not reached in {} hops'.format(self.hops))
+        screen.refresh
         return (distance, nodes)
 
 
@@ -87,4 +95,9 @@ if args.tries:
 else:
     t=9999
 
+screen = curses.initscr()
+screen.border(0)
+
 TraceRoute(args.name,t).trace()
+screen.getch()
+curses.endwin()
