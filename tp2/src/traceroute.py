@@ -96,8 +96,10 @@ else:
     t=9999
 
 screen = curses.initscr()
-screen.border(0)
+try:
+	screen.border(0)
 
-TraceRoute(args.name,t).trace()
-screen.getch()
-curses.endwin()
+	TraceRoute(args.name,t).trace()
+	screen.getch()
+finally:
+	curses.endwin()
