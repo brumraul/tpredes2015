@@ -7,6 +7,8 @@ import socket
 from collections import Counter
 import numpy
 import curses
+import scipy.stats as stats
+import warnings
 
 ICMP_ECHO_REPLY = 0
 ICMP_TIME_EXCEEDED = 11
@@ -117,7 +119,7 @@ class TraceRoute:
                 delta = mean - rtt_ant
                 rtt_ant = mean
                 
-                nodes += [{'ip': ip, 'rtt': rtt, 'mean': mean, 'std':std}]
+                nodes += [{'ip': ip, 'rtt': rtt, 'mean': mean, 'std':std, 'delta':delta}]
                 screen.addstr(ttl+3,1,'{}'.format(ttl))
                 screen.addstr(ttl+3,6,ip)
                 screen.addstr(ttl+3,23,'{:.3f} ms '.format(rtt))
@@ -129,6 +131,18 @@ class TraceRoute:
                 if ip == self.ip:
                     distance = ttl
                     break
+
+        delta_list = []
+        for n in nodes:
+            delta_list.append(n['delta'])
+#        screen.addstr(distance+5,1,str(['{:.3f}'.format(x) for x in delta_list]))
+        screen.addstr(distance+5,1,"Running Normal Test for deltas(RTT)")
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            res = stats.normaltest(delta_list)
+        screen.addstr(distance+7,1,"Z-score: {:.3f}".format(res[0]))
+        screen.addstr(distance+8,1,"p-value: {:.3%}".format(res[1]))
+        screen.refresh()
 
 
 parser = argparse.ArgumentParser(description="Traceroute to given domain name")
