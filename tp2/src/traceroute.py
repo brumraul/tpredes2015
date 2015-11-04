@@ -10,6 +10,9 @@ import curses
 import scipy.stats as stats
 import warnings
 
+import grubb
+import sys
+
 ICMP_ECHO_REPLY = 0
 ICMP_TIME_EXCEEDED = 11
 
@@ -17,7 +20,7 @@ def median(l):
     return numpy.median(numpy.array(l))
 
 class TraceRoute:
-    def __init__(self, dst, tries, hops=30): #dst is a domanin name
+    def __init__(self, dst, tries, hops=30): #dst is a domain name
         self.dst    = dst
         self.tries  = tries
         self.hops   = hops
@@ -72,7 +75,7 @@ class TraceRoute:
 
                 rtt = median(rtt_list)
                 nodes += [{'ip': ip, 'host': host, 'rtt': rtt}]
-#                print('{} {} ({}) {:.3f} ms'.format(ttl, host, ip, rtt))
+#               print('{} {} ({}) {:.3f} ms'.format(ttl, host, ip, rtt))
                 screen.addstr(ttl+3,1,'{}'.format(ttl))
                 screen.addstr(ttl+3,5,host)
                 screen.addstr(ttl+3,52,ip)
@@ -90,6 +93,7 @@ class TraceRoute:
         screen.refresh
         return (distance, nodes)
 
+	
     def trace_stat(self):
         screen.addstr(1,1,'Traceroute to {}({})'.format(self.dst, self.ip))
         screen.addstr(3,1,'TTL',curses.A_BOLD)
@@ -141,9 +145,20 @@ class TraceRoute:
             warnings.simplefilter("ignore")
             res = stats.normaltest(delta_list)
         screen.addstr(distance+7,1,"Z-score: {:.3f}".format(res[0]))
-        screen.addstr(distance+8,1,"p-value: {:.3%}".format(res[1]))
+        screen.addstr(distance+8,1,"p-value: {:.3%}".format(res[1]))        
+        
+        #falta hacerlo iterativo, para que pueda encontrar mas de un outlier
+        screen.addstr(distance+10,1,'Outliers encontrados:')
+        if grubb.hay_outliers(delta_list):
+			for node in nodes:
+				if node['delta'] == max(delta_list):
+					outlier_host = node['ip']
+			screen.addstr(distance+11,1,outlier_host)
+        
+                       
         screen.refresh()
 
+		
 
 parser = argparse.ArgumentParser(description="Traceroute to given domain name")
 group = parser.add_mutually_exclusive_group(required=True)
@@ -157,6 +172,8 @@ if args.runs:
     t=args.runs
 else:
     t=9999
+
+
 
 try:
     screen = curses.initscr()
