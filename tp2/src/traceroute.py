@@ -120,10 +120,10 @@ class TraceRoute:
                 nodes += [{'ip': ip, 'rtt': rtt, 'mean': mean, 'std':std}]
                 screen.addstr(ttl+3,1,'{}'.format(ttl))
                 screen.addstr(ttl+3,6,ip)
-                screen.addstr(ttl+3,23,'{:.3f} ms'.format(rtt))
-                screen.addstr(ttl+3,35,'{:.3f} ms'.format(mean))
-                screen.addstr(ttl+3,47,'{:.3f} ms'.format(std))
-                screen.addstr(ttl+3,59,'{:.3f} ms'.format(delta))
+                screen.addstr(ttl+3,23,'{:.3f} ms '.format(rtt))
+                screen.addstr(ttl+3,35,'{:.3f} ms '.format(mean))
+                screen.addstr(ttl+3,47,'{:.3f} ms '.format(std))
+                screen.addstr(ttl+3,59,'{:.3f} ms '.format(delta))
                 screen.refresh()
 
                 if ip == self.ip:
