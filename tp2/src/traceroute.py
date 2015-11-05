@@ -16,8 +16,11 @@ import sys
 ICMP_ECHO_REPLY = 0
 ICMP_TIME_EXCEEDED = 11
 
+
 def median(l):
     return numpy.median(numpy.array(l))
+
+   
 
 class TraceRoute:
     def __init__(self, dst, tries, hops=30): #dst is a domain name
@@ -53,16 +56,17 @@ class TraceRoute:
             return ('*', [0])
 
     def trace(self):
-#        print('Traceroute to {}({})'.format(self.dst, self.ip))
-        screen.addstr(1,1,'Traceroute to {}({})'.format(self.dst, self.ip))
-        screen.addstr(3,1,'TTL',curses.A_BOLD)
-        screen.addstr(3,5,'HOST',curses.A_BOLD)
-        screen.addstr(3,52,'IP',curses.A_BOLD)
-        screen.addstr(3,68,'RTT',curses.A_BOLD)
+        screenTop.addstr(0,1,'Traceroute to {}({})'.format(self.dst, self.ip))
+        screenTop.addstr(2,1,'TTL',curses.A_BOLD)
+        screenTop.addstr(2,5,'HOST',curses.A_BOLD)
+        screenTop.addstr(2,52,'IP',curses.A_BOLD)
+        screenTop.addstr(2,68,'RTT',curses.A_BOLD)
+        screenTop.refresh()
         
         for t in xrange(self.tries):
             distance = -1
             nodes = []
+            row = 0
             for ttl in range(1, self.hops + 1):
                 ip, rtt_list = self.distance(ttl)
                 host = '*'
@@ -76,37 +80,40 @@ class TraceRoute:
                 rtt = median(rtt_list)
                 nodes += [{'ip': ip, 'host': host, 'rtt': rtt}]
 #               print('{} {} ({}) {:.3f} ms'.format(ttl, host, ip, rtt))
-                screen.addstr(ttl+3,1,'{}'.format(ttl))
-                screen.addstr(ttl+3,5,host)
-                screen.addstr(ttl+3,52,ip)
-                screen.addstr(ttl+3,68,'{:.3f} ms'.format(rtt))
+                screen.addstr(row,1,'{}'.format(ttl))
+                screen.addstr(row,5,host)
+                screen.addstr(row,52,ip)
+                screen.addstr(row,68,'{:.3f} ms'.format(rtt))
                 screen.refresh()
+                row +=1
 
                 if ip == self.ip:
                     distance = ttl
                     break
 
+        row +=1
         if distance != -1:
-            screen.addstr(distance+5,1,'Host reached in {} hops'.format(distance))
+            screen.addstr(row,1,'Host reached in {} hops'.format(distance))
         else:
-            screen.addstr(distance+5,1,'Host not reached in {} hops'.format(self.hops))
+            screen.addstr(row,1,'Host not reached in {} hops'.format(self.hops))
         screen.refresh
-        return (distance, nodes)
 
 	
     def trace_stat(self):
-        screen.addstr(1,1,'Traceroute to {}({})'.format(self.dst, self.ip))
-        screen.addstr(3,1,'TTL',curses.A_BOLD)
-        screen.addstr(3,6,'IP',curses.A_BOLD)
-        screen.addstr(3,23,'RTT',curses.A_BOLD)
-        screen.addstr(3,35,'E(RTT)',curses.A_BOLD)
-        screen.addstr(3,47,'S(RTT)',curses.A_BOLD)
-        screen.addstr(3,59,'D(RTT)',curses.A_BOLD)
+        screenTop.addstr(0,1,'Traceroute to {}({})'.format(self.dst, self.ip))
+        screenTop.addstr(2,1,'TTL',curses.A_BOLD)
+        screenTop.addstr(2,6,'IP',curses.A_BOLD)
+        screenTop.addstr(2,23,'RTT',curses.A_BOLD)
+        screenTop.addstr(2,35,'E(RTT)',curses.A_BOLD)
+        screenTop.addstr(2,47,'S(RTT)',curses.A_BOLD)
+        screenTop.addstr(2,59,'D(RTT)',curses.A_BOLD)
+        screenTop.refresh()
 
         for t in xrange(self.tries):
             distance = -1
             nodes = []
             rtt_ant = 0
+            row =0
             for ttl in range(1, self.hops + 1):
                 ip, rtt_list = self.distance(ttl)
                 host = '*'
@@ -124,37 +131,42 @@ class TraceRoute:
                 rtt_ant = mean
                 
                 nodes += [{'ip': ip, 'rtt': rtt, 'mean': mean, 'std':std, 'delta':delta}]
-                screen.addstr(ttl+3,1,'{}'.format(ttl))
-                screen.addstr(ttl+3,6,ip)
-                screen.addstr(ttl+3,23,'{:.3f} ms '.format(rtt))
-                screen.addstr(ttl+3,35,'{:.3f} ms '.format(mean))
-                screen.addstr(ttl+3,47,'{:.3f} ms '.format(std))
-                screen.addstr(ttl+3,59,'{:.3f} ms '.format(delta))
+                screen.addstr(row,1,'{}'.format(ttl))
+                screen.addstr(row,6,ip)
+                screen.addstr(row,23,'{:.3f} ms '.format(rtt))
+                screen.addstr(row,35,'{:.3f} ms '.format(mean))
+                screen.addstr(row,47,'{:.3f} ms '.format(std))
+                screen.addstr(row,59,'{:.3f} ms '.format(delta))
                 screen.refresh()
-
+                row +=1
+                
                 if ip == self.ip:
                     distance = ttl
                     break
 
+        row +=1
         delta_list = []
         for n in nodes:
             delta_list.append(n['delta'])
 #        screen.addstr(distance+5,1,str(['{:.3f}'.format(x) for x in delta_list]))
-        screen.addstr(distance+5,1,"Running Normal Test for deltas(RTT)")
+        screen.addstr(row,1,"Running Normal Test for deltas(RTT)")
+        row+=2
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             res = stats.normaltest(delta_list)
-        screen.addstr(distance+7,1,"Z-score: {:.3f}".format(res[0]))
-        screen.addstr(distance+8,1,"p-value: {:.3%}".format(res[1]))        
+        screen.addstr(row,1,"Z-score: {:.3f}".format(res[0]))
+        row+=1
+        screen.addstr(row,1,"p-value: {:.3%}".format(res[1]))        
         
+        row+=2
         #falta hacerlo iterativo, para que pueda encontrar mas de un outlier
-        screen.addstr(distance+10,1,'Outliers encontrados:')
+        screen.addstr(row,1,'Outliers encontrados:')
+        row+=1
         if grubb.hay_outliers(delta_list):
 			for node in nodes:
 				if node['delta'] == max(delta_list):
 					outlier_host = node['ip']
-			screen.addstr(distance+11,1,outlier_host)
-        
+			screen.addstr(row,1,outlier_host)
                        
         screen.refresh()
 
@@ -173,11 +185,17 @@ if args.runs:
 else:
     t=9999
 
-
+pos =0
 
 try:
-    screen = curses.initscr()
-    screen.border(0)
+    screenTop = curses.initscr()
+    screen = curses.newwin(50,78,4,0)
+    curses.noecho()
+    curses.cbreak()
+    screen.keypad(1)
+#    screenTop.border(0)
+    screen.scrollok(True)
+    TERM_ROWS = screenTop.getmaxyx()[0]
     route = TraceRoute(args.dom,t)
     
     if args.trace:
@@ -186,7 +204,14 @@ try:
     if args.stat:
         route.trace_stat()
 
-    screen.getch()  
+    x = screen.getch()
+    while x != 27:
+        if x == curses.KEY_UP:
+            screen.scroll()
+            pos +=1
+        if x == curses.KEY_DOWN:
+            screen.scroll(-1)
+        x = screen.getch()  
 
 finally:
     curses.endwin()
