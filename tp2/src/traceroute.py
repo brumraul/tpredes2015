@@ -128,6 +128,8 @@ class TraceRoute:
                 mean = numpy.mean(rtt_list)
                 std = numpy.std(rtt_list)
                 delta = mean - rtt_ant
+                if delta < 0:
+                    delta = 0
                 rtt_ant = mean
                 
                 nodes += [{'ip': ip, 'rtt': rtt, 'mean': mean, 'std':std, 'delta':delta}]
