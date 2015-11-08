@@ -1,0 +1,73 @@
+\documentclass[a4paper, 12pt, spanish]{article}
+
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=1.5cm, top=3.5cm]{geometry}
+\usepackage[spanish, es-noshorthands]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[none]{hyphenat}
+\usepackage[colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black]{hyperref}
+
+% Descoración y gráficos
+\usepackage{caratula}
+\usepackage{graphicx} 
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{alltt}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{gnuplottex}
+\usepackage{verbatim}
+\usepackage{framed}
+
+% Acomodo fancyhdr.
+\pagestyle{fancy}
+\thispagestyle{fancy}
+\addtolength{\headheight}{1pt}
+\lhead{Teoría de las Comunicaciones}
+\rhead{$2^{\mathrm{do}}$ cuatrimestre de 2015}
+\cfoot{\thepage /\pageref*{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\sloppy
+
+\parskip=5pt % 10pt es el tama de fuente
+
+% Pongo en 0 la distancia extra entre itemes.
+\let\olditemize\itemize
+\def\itemize{\olditemize\itemsep=0pt}
+
+
+\materia{Teoría de las Comunicaciones}
+\grupo{Conformación del grupo}
+\tituloCaratula{Trabajo Práctico N$^\circ$2\\ \vspace{0.5cm} Rutas en Internet}
+
+\integrante{Alvaro Jose Fernando}{89/10}{fer1578@gmail.com}
+\integrante{Barbeito Nicolás}{147/10}{nicolasbarbeiton@gmail.com}
+\integrante{Brum Raúl}{199/98}{brumraul@gmail.com}
+\integrante{Nievas Yésica}{340/05}{yesica.nievas@gmail.com}
+
+
+
+\begin{document}
+
+%\setcounter{tocdepth}{2}
+
+\begin{titlepage}
+
+\maketitle
+
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+\input{introduccion.tex}
+\input{desarrollo.tex}
+\input{resultados.tex}
+\input{conclusiones.tex}
+
+\ref{LastPage}
+
+\end{document}
