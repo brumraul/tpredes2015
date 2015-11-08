@@ -1,1 +1,45 @@
 \section{Desarrollo} 
+Para realizar las consignas planteadas en el presente trabajo práctico utilizaremos una serie de herramientas cuya descripción y detalles de implementación mostraremos a continuación.
+
+\subsection{Traceroute}
+Para la implementación una herramienta similar a traceroute utilizaremos la librería ``scapy'' de python a fin de generar paquetes ``ICMP'' variando el campo ``TTL'' y posteriormente analizaremos las respuestas recibidas.
+ 
+El encabezado del paquete IP tiene un campo llamado ``TTL'' (Time To Live) y un limite superior de la cantidad de tiempo que un paquete IP puede permanecer en la red.
+El campo TTL es seteado por el remitente del paquete y es reducido por cada router por el que pasa el paquete para llegar a su destino. Si el campo llega a 0 antes de llegar a destino el paquete es descartado y un paquete ICMP ``Time Exceeded'' es enviado al remitente para notificarlo de lo sucedido. La IP fuente de ese paquete es la IP del router que descarto el paquete.
+En Teoría el campo TTL bajo IPv4 es medido en segundos y cada host por el que pasa el paquete debe reducirlo en al menos una unidad. En la practica el campo es reducido en una unidad por cada host.
+
+Para determinar la ruta de paquete al host destino enviaremos varios paquetes IP incrementando el campo TTL en una unidad para ir recibiendo los ``Time Exceeded'' de cada router por el que pasa el paquete. EL ``RTT'' (Round Trip Time) se compondrá del tiempo que tarda el paquete en viajar hasta cada nodo mas el tiempo de encolamiento en cada nodo. A fin de homogeneizar el resultado obtenido y descartar ``outliners'' correremos nuestro algoritmo con varias iteraciones y tomaremos valores promedios.
+
+Dada la decisión adoptada de correr el algoritmo en varias iteraciones, la forma de calcular la rutas y la naturaleza de internet se nos pueden plantear los siguientes casos.
+
+\subsubsection{Rutas alternativas}
+
+Dada la naturaleza de internet y el funcionamiento de los routers por los que pasa nuestro paquete puede suceder que un paquete a un mismo destino tome rutas distintas según el momento en que sea enviado. Esto puede suceder por ejemplo por la congestión de un router que decida forwardear un paquete por un puerto distinto y por lo tanto tomara una ruta distinta o puede suceder que un router se encuentre caído por lo que en router anterior envié el paquete por otra ruta.
+A los efectos de nuestra herramienta se nos planteara que en un determinado salto un paquete tiene rutas distintas por las que pasa, a fin de subsanar este inconveniente para cada salto tomaremos la ruta con mayor frecuencia de aparición en las diferentes corridas de nuestro algoritmo.
+
+\subsubsection{RTT acumulado} 
+
+Pueden darse casos donde el RTT al salto $i$ sea menor que el RTT al salto anterior.
+Parecería extraño que $RTT_i$ sea menor que $RTT_{i-1}$ pero esto aparece con frecuencia en la practica. Las razones para este comportamiento pueden ser por la congestión de los routers como así también por la prioridad en la cola de los mismos. En este ultimo caso por ejemplo el router puede tener menor prioridad para la cola de paquetes ICMP y por lo tanto el tiempo de encolamiento en este router sera mayor cuando descarta el paquete y enviá un paquete ICMP ``Time Exceed'' que cuando forwardea el paquete al router siguiente. Esto generara que el RTT a ese router sea mayor que el RTT al router siguiente.
+
+En la implementación de nuestra herramienta para obtener el $\Delta$RTT correspondiente al RTT en el salto $i$ usaremos la siguiente formula:
+
+\[
+\begin{array}{l l}
+    \Delta RTT_0 = & 0\\
+    \Delta RTT_1 = & RTT_1\\
+    \Delta RTT_i = & \left\{ 
+        \begin{array}{l l} 
+            RTT_i - RTT_{i-1} & \text{Si $RTT_i > RTT_{i-1}$}\\
+            0  & \text{Caso Contrario}
+        \end{array}\right\}
+\end{array}
+\]
+
+Esto es para evitar computar $\Delta$RTT negativos que pueden generarse por lo comentado anteriormente.
+
+\subsection{Estadísticas}
+
+Para el cumplimiento de la consigna sobre estadísticas de las rutas utilizamos la librería ``numpy'' de python para el calculo de la media y el desvió estándar, la librería ``scipy'' de python para el calculo del test de normalidad sobre los $\Delta$RTT y finalmente implementamos el ``Test de Grubbs'' sobre los $\Delta$RTT a fin de detectar outliners para relacionarlos con la detección de enlaces submarinos en las rutas.
+
+\subsection{Geolocalización}
