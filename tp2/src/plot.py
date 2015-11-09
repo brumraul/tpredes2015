@@ -28,6 +28,7 @@ with open(args.input) as file:
         label.append(words[0])
         rtt.append(words[1])
         delta.append(words[2])
+    print delta
 
 if args.bar:
     plt.figure(figsize=(12,6))

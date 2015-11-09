@@ -161,15 +161,26 @@ class TraceRoute:
         screen.addstr(row,1,"p-value: {:.3%}".format(res[1]))        
         
         row+=2
-        #falta hacerlo iterativo, para que pueda encontrar mas de un outlier
-        screen.addstr(row,1,'Outliers encontrados:')
-        row+=1
+        
+        outliers = grubb.get_outliers(nodes)
+        if outliers:
+            screen.addstr(row,1,'Outliers encontrados:')
+            row+=1
+            for o in outliers:  
+                screen.addstr(row,1,o)
+                row += 1        
+        else:
+            screen.addstr(row,1,'No se encontraron outliers.')
+                      
+        """
         if grubb.hay_outliers(delta_list):
-			for node in nodes:
-				if node['delta'] == max(delta_list):
-					outlier_host = node['ip']
-			screen.addstr(row,1,outlier_host)
-                       
+            screen.addstr(row,1,'Outliers encontrados:')
+            row+=1
+            for node in nodes:
+                if node['delta'] == max(delta_list):
+                    outlier_host = node['ip']
+            screen.addstr(row,1,outlier_host)
+        """
         screen.refresh()
 
 		
