@@ -191,3 +191,106 @@ Tanto en la figura \ref{histo:pretoria} como en la figura \ref{lines:pretoria} p
         \label{table:pretoria} 
     \end{center}
 \end{table}
+
+
+\subsection{Universidad de M\'alaga}
+El host de destino de la universidad de M\'alaga sera el dominio ``www.uma.es'' cuya IP es ``150.214.40.97''. El host de la universidad de M\'alaga se encuentra ubicado en la ciudad de M\'alaga, Espa~{n}a. El origen sera un host ubicado en Nueva York, Usa utilizando como ISP a Digital Ocean Inc.
+
+
+\subsubsection{Datos}
+
+Los datos obtenidos para este caso fueron los siguientes:
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{| r | r | r | r | r |}
+  \hline
+  {\bf TTL} & \multicolumn{1}{|c|}{\bf IP} & {\bf E(RTT) (ms)} & {\bf S(RTT) (ms)} & {\bf $\Delta$RTT (ms)}\\
+  \hline
+\hline 1 & 45.55.128.253 & 13.816 & 16.728 & 13.816\\
+\hline 2 & 162.243.188.221 & 0.722 & 2.366 & 0.000\\
+\hline 3 & 62.115.45.9 & 1.729 & 3.298 & 1.007\\
+\hline 4 & 154.54.11.109 & 1.967 & 0.282 & 0.237\\
+\hline 5 & 154.54.47.29 & 1.895 & 0.254 & 0.000\\
+\rowcolor{blue!25}\hline 6 & 154.54.31.190 & 74.812 & 0.185 & 72.917\\
+\hline 7 & 130.117.50.78 & 100.630 & 0.541 & 25.818\\
+\hline 8 & 130.117.50.26 & 110.259 & 0.347 & 9.629\\
+\hline 9 & 130.117.0.118 & 95.341 & 0.390 & 0.000\\
+\hline 10 & 149.11.68.50 & 100.158 & 16.421 & 4.817\\
+\hline 11 & 130.206.245.38 & 124.906 & 5.886 & 24.748\\
+\hline 12 & 130.206.194.2 & 109.992 & 8.925 & 0.000\\
+\hline 13 & 150.214.231.2 & 112.184 & 7.347 & 2.192\\
+\hline 14 & 150.214.231.170 & 115.863 & 0.639 & 3.679\\
+\hline 15 & 150.214.40.97 & 110.658 & 0.106 & 0.000\\
+\hline
+        \end{tabular}
+        \caption{$\overline{RTT}$, $\sigma$RTT y $\Delta$RTT para la ruta utilizada para llegar www.uma.es}
+        \label{table:malaga} 
+    \end{center}
+\end{table}
+
+Analizando la información aportada por la tabla \ref{table:malaga} podemos notar que el salto 6 sobresale por sobre el resto en cuanto a sus tiempos de $\Delta$RTT. 
+
+\subsubsection{RTT y $\Delta$RTT}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{data/rtt-malaga-bar.png}
+        \caption{www.uma.es - $\Delta$RTT}
+        \label{histo:malaga}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{data/rtt-malaga-lines.png}
+        \caption{www.uma.es - RTT y $\Delta$RTT}
+        \label{lines:malaga}
+    \end{center}
+\end{figure}
+
+Tanto en la figura \ref{histo:malaga} como en la figura \ref{lines:malaga} podemos comprobar los que habíamos notado en la tabla \ref{table:malaga}. El salto 6 se destaca sobre el resto. Es probable que exista un enlace submarino utilizado para ir de America a Europa en ese salto. Esto lo analizaremos en las siguientes secciones.
+
+\subsubsection{Test de Grubbs}\label{malaga:grubbs}
+
+\subsubsection{Geolocalización}
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{| r | r | c | c |}
+  \hline
+  {\bf TTL} & \multicolumn{1}{|c|}{\bf IP} & {\bf DNS} & {\bf Ubicación}\\
+  \hline
+\hline 1 & 45.55.128.253 & no disponible & United States, New York\\
+\hline 2 & 162.243.188.221 & no diponible & United States, California\\
+\hline 3 & 62.115.45.9 & nyk-b3-link.telia.net & United States, New York\\
+\hline 4 & 154.54.11.109 & be1299.ccr21.jfk04.atlas.cogentco.com & United States, California\\
+\hline 5 & 154.54.47.29 & be2325.ccr42.jfk02.atlas.cogentco.com & United States, New York\\
+\rowcolor{blue!25}\hline 6 & 154.54.31.190 & be2747.ccr42.par01.atlas.cogentco.com & United States, Virginia\\
+\hline 7 & 130.117.50.78 & be2423.ccr22.bio02.atlas.cogentco.com & Spain, Bilbao\\
+\hline 8 & 130.117.50.26 & be2293.ccr22.mad05.atlas.cogentco.com & Spain, Madrid\\
+\hline 9 & 130.117.0.118 & te0-0-2-0.rcr11.b015537-1.mad05.atlas.cogentco.com & Spain, Madrid\\
+\hline 10 & 149.11.68.50 & no disponible & Spain, Madrid\\
+\hline 11 & 130.206.245.38 & ciemat.ae1.cica.rt1.and.red.rediris.es & Spain, Madrid\\
+\hline 12 & 130.206.194.2 & cica-router.red.rediris.es & Spain, Madrid\\
+\hline 13 & 150.214.231.2 & xe-0-0-0.malaga01.red.cica.es & Spain, Andalucia, Baeza\\
+\hline 14 & 150.214.231.170 & uma-router.red.cica.es & Spain, Andalucia, Baeza\\
+\hline 15 & 150.214.40.97 & www.uma.es & Spain, Andalucia, M\'alaga\\
+\hline
+        \end{tabular}
+        \caption{Ruta utilizada para llegar www.uma.es con la ubicación de los diferentes saltos por los que se pasa. Se encuentra resaltado el salto distinguido calculado en la sección \ref{malaga:grubbs}}
+        \label{table:malaga} 
+    \end{center}
+\end{table}
+
+En la tabla \ref{table:malaga} notamos que el salto 6 figura ubicado en Virginia, Estados Unidos siendo correctamente el distinguido ya que el siguiente salto figura situado en europa. En el mapa \ref{mapa:malaga} se puede apreciar el enlace intercontinental.
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{data/mapa-malaga.png}
+        \caption{www.uma.es - Traceroute}
+        \label{mapa:malaga}
+    \end{center}
+\end{figure}
+
