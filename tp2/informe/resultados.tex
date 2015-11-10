@@ -94,3 +94,13 @@ Tanto en la figura \ref{histo:tokyo} como en la figura \ref{lines:tokyo} podemos
         \label{table:tokyo} 
     \end{center}
 \end{table}
+
+En la tabla \ref{table:tokyo} notamos que el salto 10 figura ubicado en Houston, Estados Unidos, sin embargo dado el $\Delta$RTT de este salto que hizo que sea distinguido como outlier en la la sección \ref{tokyo:grubbs} y su DNS reverso ``ae-0.r21.osakjp02.jp.bb.gin.ntt.net'' inferimos que es un error en las bases de datos de geolocalización y que ese salto se encuentra efectivamente ubicado en Osaka, Japon. Por este motivo al trazar el traceroute sobre el mapa de la figura \ref{mapa:tokyo} lo ubicamos en esta última localidad.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{data/mapa-tokyo.png}
+        \caption{www.u-tokyo.ac.jp - Traceroute}
+        \label{mapa:tokyo}
+    \end{center}
+\end{figure}
