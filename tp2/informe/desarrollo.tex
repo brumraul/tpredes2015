@@ -40,6 +40,19 @@ Esto es para evitar computar $\Delta$RTT negativos que pueden generarse por lo c
 
 \subsection{Estadísticas}
 
-Para el cumplimiento de la consigna sobre estadísticas de las rutas utilizamos la librería ``numpy'' de python para el calculo de la media y el desvió estándar, la librería ``scipy'' de python para el calculo del test de normalidad sobre los $\Delta$RTT y finalmente implementamos el ``Test de Grubbs'' sobre los $\Delta$RTT a fin de detectar outliners para relacionarlos con la detección de enlaces submarinos en las rutas.
+Para el cumplimiento de la consigna sobre estadísticas de las rutas utilizamos la librería ``numpy'' de python para el calculo de la media y el desvió estándar, la librería ``scipy'' de python para el calculo del test de normalidad sobre los $\Delta$RTT y finalmente implementamos el ``Test de Grubbs'' sobre los $\Delta$RTT a fin de detectar outliers para relacionarlos con la detección de enlaces submarinos en las rutas.
 
 \subsection{Geolocalización}
+
+En esta parte intentaremos localizar la ubicación geográfica de los distintos routers por los que pasan los paquetes y exponerlos luego en un mapa trazando la probable ruta recorrida.
+Para esto nos valeremos de servicios de geolocalización que permiten relacionar una dirección IP con una ubicación geográfica.
+Cabe aclarar que la información brindada por estos servicios no siempre es exacta, ya sea porque la base de datos esta desactualizada, tenga errores o puede suceder que una red este registrada en un país pero la ubicación física del router este en otro por lo que la ubicación aportada por el servicio de geolocalización sera errónea.
+En las tablas de traceroute dejaremos reflejada la ubicación aportada por los servicios de geolocalización, si embargo a la hora de realizar el mapa tomaremos algunas medidas a fin de tratar de mitigar estos errores.
+
+\begin{itemize}
+\item Si la geolocalización informa que hay un cambio de país en el salto con una distancia considerable entre ambos paises pero esto no se condice con el $\Delta$RTT pequeño del salto asumiremos que la geolocalización esta informando el lugar de registro de la red y no la ubicación física del router por lo que utilizaremos como ubicación la de su salto anterior.
+\item Si la geolocalización informa que el próximo salto esta en el mismo país y ese salto tiene un $\Delta$RTT muy alto, lo que haremos es mirar la ubicación del salto siguiente a ese, si este esta en otro país pero tiene un $\Delta$RTT pequeño, entonces asumiremos que el salto en cuestión esta en otro país y que se trata del mismo error anterior de registración de la red.
+\item Ya sea para confirmar la opción tomada en los items anteriores o para decidir en caso de no ser tan clara las diferencias de $\Delta$RTT utilizaremos también la información aportada por ``Reverse DNS'' para así atraves del nombre de dominio de cada IP tratar de conseguir pistas sobre la ubicación geográfica de los routers.
+\end{itemize}
+
+Aclaramos que estas heurísticas no son del todo eficaces por lo que bien podríamos estar utilizando información errónea al dibujar la ruta en el mapa.
