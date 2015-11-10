@@ -268,6 +268,21 @@ Tanto en la figura \ref{histo:malaga} como en la figura \ref{lines:malaga} podem
 
 \subsubsection{Test de Grubbs}\label{malaga:grubbs}
 
+Previo a correr el test de Grubbs corrimos un test de normalidad sobre la distribución de $\Delta$RTT obteniendo los siguientes resultados:
+
+\begin{itemize}
+\item \textbf{z-score: 26.158}
+\item \textbf{p-value: 0.000}
+\end{itemize}
+
+De los resultados obtenidos deducimos entonces que la distribución de los $\Delta$RTT no es ``Normal'', igualmente como mencionamos en la sección \ref{desarrollo:stats} correremos el test de Grubbs a fin de corroborar luego si encuentra los enlaces submarinos de todas formas.\\
+Los resultados obtenidos fueron los siguientes outliers:
+
+\begin{itemize}
+\item 154.54.31.190
+\end{itemize}
+
+
 \subsubsection{Geolocalización}
 
 \begin{table}[H]
@@ -298,7 +313,7 @@ Tanto en la figura \ref{histo:malaga} como en la figura \ref{lines:malaga} podem
     \end{center}
 \end{table}
 
-En la tabla \ref{table:malaga} notamos que el salto 6 figura ubicado en Virginia, Estados Unidos siendo correctamente el distinguido ya que el siguiente salto figura situado en Europa. En el mapa \ref{mapa:malaga} se puede apreciar el enlace intercontinental.
+En la tabla \ref{table:malaga} notamos que el salto 6 figura ubicado en Virginia, Estados Unidos siendo correctamente el distinguido ya que el siguiente salto figura situado en europa. En el mapa \ref{mapa:malaga} se puede apreciar el enlace intercontinental. Los saltos 6 y 7 aparecen en el mapa con el nombre de ``A'' y ``B'' respectivamente.
 
 
 \begin{figure}[H]
