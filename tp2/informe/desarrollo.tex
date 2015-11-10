@@ -38,7 +38,7 @@ En la implementación de nuestra herramienta para obtener el $\Delta$RTT corresp
 
 Esto es para evitar computar $\Delta$RTT negativos que pueden generarse por lo comentado anteriormente.
 
-\subsection{Estadísticas}
+\subsection{Estadísticas}\label{desarrollo:stats}
 
 Para el cumplimiento de la consigna sobre estadísticas de las rutas utilizamos la librería ``numpy'' de python para el calculo de la media y el desvió estándar, la librería ``scipy'' de python para el calculo del test de normalidad sobre los $\Delta$RTT y finalmente implementamos el ``Test de Grubbs'' sobre los $\Delta$RTT a fin de detectar outliers para relacionarlos con la detección de enlaces submarinos en las rutas.\\
 Para el test de Grubbs si bien es requisito para correr el mismos que la distribución de los $\Delta$RTT sea ``Normal'', a sugerencia de la cátedra en caso de no serlo correremos igualmente el test y verificaremos si de todas maneras detecta los enlaces submarinos.

@@ -63,6 +63,21 @@ Tanto en la figura \ref{histo:tokyo} como en la figura \ref{lines:tokyo} podemos
 
 \subsubsection{Test de Grubbs}\label{tokyo:grubbs}
 
+Previo a correr el test de Grubbs corrimos un test de normalidad sobre la distribución de $\Delta$RTT obteniendo los siguientes resultados:
+
+\begin{itemize}
+\item \textbf{z-score: 21.762}
+\item \textbf{p-value: 0.002}
+\end{itemize}
+
+De los resultados obtenidos deducimos entonces que la distribución de los $\Delta$RTT no es ``Normal'', igualmente como mencionamos en la sección \ref{desarrollo:stats} correremos el test de Grubbs a fin de corroborar luego si encuentra los enlaces submarinos de todas formas.\\
+Los resultados obtenidos fueron los siguientes outliers:
+
+\begin{itemize}
+\item 64.212.107.98
+\item 129.250.2.177
+\end{itemize}
+
 \subsubsection{Geolocalización}
 
 \begin{table}[H]
