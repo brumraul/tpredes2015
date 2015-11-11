@@ -1,1 +1,19 @@
 \section{Conclusiones}
+
+Tras haber corrido los distintos test sobre los host bajo estudio notamos que no obtuvimos variaciones en las rutas utilizadas por los paquetes, sino que generalmente se mantuvieron las mismas rutas entre las distintas corridas. 
+Notamos también que la información provista por los servicios de geolocalización en muchos casos no se se corresponde con la localización física del router.
+En cuanto a la localización de enlaces submarinos mediante el test de hipótesis realizado en los cuatro casos de estudio el mismo detecto en forma correcta los mismos por lo cuál concluimos que el uso de esta herramienta podría llegar a ser viable para la detección de los mismos.
+Otra particularidad que notamos es que muchos routers asignan una menor prioridad a los paquetes ``ICMP'' lo que origino que varios saltos tuviesen $\Delta$RTT negativos.
+
+A continuación expondremos las particularidades de cada caso de estudio:
+
+\subsection{Universidad de Tokyo}
+
+Para este caso de estudio mas allá del error informado por los servicios de geolocalización para el salto 10 de la tabla de la figura \ref{table:tokyo}, tanto los valores de RTT obtenidos como los outliers detectados por el test de Grubbs parecen tener correspondencia con lo realmente acontecido.\\
+Si bien los $\Delta$RTT obtenidos parecen no seguir una distribución normal los outliers obtenidos mediante el test de Grubbs para detectar los enlaces submarinos parecen ser los correctos y coinciden con lo que se puede apreciar en los gráficos de las figura \ref{histo:tokyo} y la figura \ref{lines:tokyo}.
+
+\subsection{Universidad de Pretoria}
+
+\subsection{Universidad de Málaga}
+
+\subsection{Universidad MIT}
