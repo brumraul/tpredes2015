@@ -450,7 +450,8 @@ Los resultados obtenidos fueron los siguientes outliers:
     \end{center}
 \end{table}
 
-En el cuadro \ref{table:mit} se obserba que los saltos distinguidos corresponden a enlaces submarinos.
+En el cuadro \ref{table:mit} se observa que los saltos distinguidos corresponden a enlaces submarinos. Podemos notar que el primer salto ocurre a un servidor que nuestras herramientas de geolocalización sitúan en China, pero si notamos el rtt hacia el mismo, es probable que la localización sea errónea. Luego de investigar esa ip, nos dimos cuenta que, realizando traceroutes hacia servidores que se encuentran en Argentina, la ip 36.6.64.1 aparece igualmente, lo que, aunque no es imposible, tiene poco sentido si el servidor realmente se encuentra en China. \\
+    Teniendo en cuenta esto, el rtt bajo y el hecho de que rutas hacia servidores en  argentina también pasan por dicha ip, creemos que el servidor correspondiente pertenece a alguna red interna del ISP (Claro en este caso), posiblemente con alguna mala configuración.
 
 
 \begin{figure}[H]
