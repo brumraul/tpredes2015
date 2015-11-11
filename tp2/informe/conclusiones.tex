@@ -13,6 +13,8 @@ Para este caso de estudio mas allá del error informado por los servicios de geo
 Si bien los $\Delta$RTT obtenidos parecen no seguir una distribución normal los outliers obtenidos mediante el test de Grubbs para detectar los enlaces submarinos parecen ser los correctos y coinciden con lo que se puede apreciar en los gráficos de las figura \ref{histo:tokyo} y la figura \ref{lines:tokyo}.
 
 \subsection{Universidad de Pretoria}
+Este caso de estudio se eligió originalmente para obtener la ruta a un continente diferente a los otros casos elegidos, pero al realizar las tareas de geolocalización nos encontramos con que el servidor de esta universidad sudafricana se encuentra en Inglaterra. Aún así se decidió no cambiar el caso dado que el correspondiente a España tiene un origen diferente, lo que nos permite ver la diferencia entre ambas rutas que tienen un destino cercano. \\
+En este caso de estudio se puede ver que con el test de Grubbs se detectaron cuatro outliers, pero siendo dos de ellos falsos positivos como se pueden ver que son el salto 2 y el 9, lo cual se puede ver claramente en los gráficos de las figura \ref{histo:pretoria} y la figura \ref{lines:pretoria}. Aún así devolvió correctamente los correspondientes a enlaces submarinos entre Buenos Aires y Miami, y entre Miami y París.
 
 \subsection{Universidad de Málaga}
 Este caso a diferencia de los otros el trace tiene un origen diferente (USA) quizás por eso la ruta parece más directa.

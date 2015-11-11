@@ -121,7 +121,7 @@ En la tabla \ref{table:tokyo} notamos que el salto 10 figura ubicado en Houston,
 \end{figure}
 
 \subsection{Universidad de Pretoria}
-El host de destino de la universidad de Pretoria sera el dominio ``www.up.ac.za'' cuya IP es ``5.10.110.85''. El host de la universidad de Pretoria se encuentra ubicado la ciudad de Pretoria, en Sudáfrica. El origen es un host ubicado en la Ciudad de Buenos Aires, Argentina utilizando como isp a Telecentro.
+El host de destino de la universidad de Pretoria sera el dominio ``www.up.ac.za'' cuya IP es ``5.10.110.85''. El host de la universidad de Pretoria se encuentra ubicado la ciudad de Londres, Inglaterra a pesar de corresponder a la universidad de la ciudad de Pretoria, Sudafrica. El origen es un host ubicado en la Ciudad de Buenos Aires, Argentina utilizando como isp a Telecentro.
 
 \subsubsection{Datos}
 
@@ -134,19 +134,18 @@ Los datos obtenidos para este caso fueron los siguientes:
   {\bf TTL} & \multicolumn{1}{|c|}{\bf IP} & {\bf E(RTT) (ms)} & {\bf S(RTT) (ms)} & {\bf $\Delta$RTT (ms)}\\
   \hline 
 \hline 1  & 192.168.0.1 &  3.037 & 3.218 & 3.037\\
-\rowcolor{blue!25}\hline 2  & 10.19.0.1 & 21.794 & 23.114 & 18.757\\
+\hline 2  & 10.19.0.1 & 21.794 & 23.114 & 18.757\\
 \hline 3  & 200.115.195.81 & 19.089 & 14.663 & 0.000\\
 \hline 4  & 208.178.195.214 & 20.840 & 13.042 & 1.751\\ 
 \hline 5  & 208.178.195.213 & 22.422 & 18.565 & 1.582\\ 
 \rowcolor{blue!25}\hline 6  & 67.17.75.66 & 158.745 & 28.768 & 136.323\\ 
 \hline 7  & 4.68.111.121 &  152.379 & 26.292 & 0.000\\ 
 \rowcolor{blue!25}\hline 8  & 4.69.168.11 & 272.512 & 19.879 & 120.133\\ 
-\hline 9  & 4.69.168.11 & 277.326 & 26.226 & 4.814\\ 
-\rowcolor{blue!25}\hline 10  & 212.73.206.174 & 292.420 & 28.952 & 15.094\\ 
-\hline 11  & 50.97.19.101 & 281.778 & 31.841 & 0.000\\ 
-\hline 12  & 50.97.19.41 & 289.224 & 33.909 & 7.446\\ 
-\hline 13  & 5.10.118.135 & 278.807 & 23.145 & 0.000\\ 
-\hline 14  & 5.10.110.85 & 279.282 & 18.527 & 0.476\\ 
+\hline 9  & 212.73.206.174 & 292.420 & 28.952 & 15.094\\ 
+\hline 10  & 50.97.19.101 & 281.778 & 31.841 & 0.000\\ 
+\hline 11  & 50.97.19.41 & 289.224 & 33.909 & 7.446\\ 
+\hline 12  & 5.10.118.135 & 278.807 & 23.145 & 0.000\\ 
+\hline 13  & 5.10.110.85 & 279.282 & 18.527 & 0.476\\ 
 \hline
         \end{tabular}
         \caption{$\overline{RTT}$, $\sigma$RTT y $\Delta$RTT para la ruta utilizada para llegar www.up.ac.za}
@@ -154,7 +153,7 @@ Los datos obtenidos para este caso fueron los siguientes:
     \end{center}
 \end{table}
 
-Analizando la información aportada por la tabla \ref{table:pretoria} podemos notar que los saltos 2, 6, 8 y 10 sobresalen por sobre el resto en cuanto a sus tiempos de $\Delta$RTT. 
+Analizando la información aportada por la tabla \ref{table:pretoria} podemos notar que los saltos 6 y 8 sobresalen por sobre el resto en cuanto a sus tiempos de $\Delta$RTT. 
 
 \subsubsection{RTT y $\Delta$RTT}
 
@@ -174,9 +173,26 @@ Analizando la información aportada por la tabla \ref{table:pretoria} podemos no
     \end{center}
 \end{figure}
 
-Tanto en la figura \ref{histo:pretoria} como en la figura \ref{lines:pretoria} podemos comprobar los que habíamos notado en la tabla \ref{table:pretoria}. Esto es que tanto los saltos 2, 6, 8 y 10 se destacan por sobre el resto. En caso de existir algún enlace submarino seguramente este se correspondería con alguno de estos saltos. Esto lo analizaremos en las siguientes secciones.
+Tanto en la figura \ref{histo:pretoria} como en la figura \ref{lines:pretoria} podemos comprobar los que habíamos notado en la tabla \ref{table:pretoria}. Esto es que tanto los saltos 6y 8 se destacan por sobre el resto. En caso de existir algún enlace submarino seguramente este se correspondería con alguno de estos dos últimos saltos nombrados.
 
 \subsubsection{Test de Grubbs}\label{pretoria:grubbs}
+Previo a correr el test de Grubbs corrimos un test de normalidad sobre la distribución de $\Delta$RTT obteniendo los siguientes resultados:
+
+\begin{itemize}
+\item \textbf{z-score: 16.044}
+\item \textbf{p-value: 0.033}
+\end{itemize}
+
+De los resultados obtenidos deducimos entonces que la distribución de los $\Delta$RTT es ``Normal'', igualmente como mencionamos en la sección \ref{desarrollo:stats} correremos el test de Grubbs a fin de corroborar luego si encuentra los enlaces submarinos de todas formas.\\
+Los resultados obtenidos fueron los siguientes outliers:
+
+\begin{itemize}
+\item 67.17.75.66   
+\item 4.69.168.11   
+\item 10.19.0.1
+\item 212.73.206.174
+\end{itemize}
+
 
 \subsubsection{Geolocalización}
 
@@ -187,25 +203,34 @@ Tanto en la figura \ref{histo:pretoria} como en la figura \ref{lines:pretoria} p
   {\bf TTL} & \multicolumn{1}{|c|}{\bf IP} & {\bf DNS} & {\bf Ubicación}\\
   \hline
 \hline 1  & 192.168.0.1 & (ip privada) & \\
-\rowcolor{blue!25}\hline 2  & 10.19.0.1 & (ip privada) & \\
+\hline 2  & 10.19.0.1 & (ip privada) & \\
 \hline 3  & 200.115.195.81 & cpe-200-115-195-81.telecentro-reversos.com.ar & Buenos Aires, Argentina\\
 \hline 4  & 208.178.195.214 & global-crossing-argentina-s-a.xe-0-3-1.ar3.eze1.gblx.net & Buenos Aires, Argentina\\ 
 \hline 5  & 208.178.195.213 & xe-0-3-1.ar3.eze1.gblx.net & Buenos Aires, Argentina\\ 
 \rowcolor{blue!25}\hline 6  & 67.17.75.66 &  po3-20G.ar3.MIA2.gblx.net & Miami, USA\\ 
 \hline 7  & 4.68.111.121 &  ae5.edge2.miami2.level3.net  & Miami, USA\\ 
 \rowcolor{blue!25}\hline 8  & 4.69.168.11 & ae-1-60.ear1.Paris1.Level3.net & Paris, Francia\\ 
-\hline 9  & 4.69.168.11 & ae-1-60.ear1.Paris1.Level3.net & Paris, Francia\\ 
-\rowcolor{blue!25}\hline 10  & 212.73.206.174 & unknown.Level3.net & Londres, Inglaterra\\ 
-\hline 11  & 50.97.19.101 & ae1.bbr02.tg01.lon01.networklayer.com & Londres, Inglaterra\\ 
-\hline 12  & 50.97.19.41 & ae6.dar01.lon02.networklayer.com & Londres, Inglaterra\\ 
-\hline 13  & 5.10.118.135 & po1.fcr01b.lon02.networklayer.com & Londres, Inglaterra\\ 
-\hline 14  & 5.10.110.85 &  55.6e.0a05.ip4.static.sl-reverse.com & Londres, Inglaterra\\ 
+\hline 9  & 212.73.206.174 & unknown.Level3.net & Londres, Inglaterra\\ 
+\hline 10  & 50.97.19.101 & ae1.bbr02.tg01.lon01.networklayer.com & Londres, Inglaterra\\ 
+\hline 11  & 50.97.19.41 & ae6.dar01.lon02.networklayer.com & Londres, Inglaterra\\ 
+\hline 12  & 5.10.118.135 & po1.fcr01b.lon02.networklayer.com & Londres, Inglaterra\\ 
+\hline 13  & 5.10.110.85 &  55.6e.0a05.ip4.static.sl-reverse.com & Londres, Inglaterra\\ 
 \hline
         \end{tabular}
         \caption{Ruta utilizada para llegar www.up.ac.za con la ubicación de los diferentes saltos por los que se pasa. Se encuentran resaltados los saltos distinguidos calculados en la sección \ref{pretoria:grubbs}}
         \label{table:pretoria} 
     \end{center}
 \end{table}
+
+Se presenta a continuación el mapa \ref{mapa:pretoria} en los cuales se puede ver reflejada la información indicada en la tabla \label{table:pretoria}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{data/mapa-pretoria.png}
+        \caption{www.up.ac.za - Traceroute}
+        \label{mapa:pretoria}
+    \end{center}
+\end{figure}
 
 
 \subsection{Universidad de M\'alaga}
