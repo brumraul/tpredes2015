@@ -324,3 +324,142 @@ En la tabla \ref{table:malaga} notamos que el salto 6 figura ubicado en Virginia
     \end{center}
 \end{figure}
 
+
+
+
+
+
+\subsection{Universidad MIT}
+El host de destino fue la universidad M.I.T cuyo dominio es ``web.mit.edu'' con dirección ip ``23.3.254.242''. El server que contiene el sitio se encuentra en Boston, EEUU. El traceroute se originó en Buenos Aires.
+
+
+\subsubsection{Datos}
+
+Los datos obtenidos para este caso fueron los siguientes:
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{| r | r | r | r | r |}
+  \hline
+  {\bf TTL} & \multicolumn{1}{|c|}{\bf IP} & {\bf E(RTT) (ms)} & {\bf S(RTT) (ms)} & {\bf $\Delta$RTT (ms)}\\
+  \hline
+\hline 1 & 36.6.64.1 & 16.857 & 19.297 & 16.857 \\
+\hline 2 &  190.220.185.65 & 14.007 & 8.700 & 0.000   \\
+\hline 3 &  10.2.8.205 & 16.958 & 17.230 & 2.951   \\
+\hline 4 &  10.2.11.217 & 19.137 & 13.277 & 2.179   \\
+\hline 5 &  10.2.11.217 & 18.659 & 15.835 &  0.000   \\
+\hline 6 &  10.2.11.229 &  17.837   &  10.482   &  0.000   \\
+\hline 7 &  10.2.11.229 & 18.594   &  11.833   &  0.758   \\
+\rowcolor{blue!25}\hline 8 & 208.48.239.69 & 155.411   & 63.920   &  136.817   \\
+\hline 9 &  4.69.207.38 & 143.480   & 7.582    &  0.000   \\
+\hline 10 &  4.69.132.114 & 175.854   & 17.489   &  32.374   \\
+\hline 11 &  4.69.140.133 & 175.043   & 15.968   &  0.000   \\
+\hline 12 &  4.69.151.161 & 173.678   & 21.824   &  0.000   \\
+\hline 13 &  4.69.145.209 & 172.987   & 14.266   &  0.000   \\
+\hline 14 &  4.59.36.26 & 175.472   & 15.564   &  2.485   \\
+\hline 15 &  94.142.125.70 & 208.940   & 20.446   &  33.468   \\
+\rowcolor{blue!25}\hline 16 & 94.142.124.33 & 303.767   & 24.269   &  94.828   \\
+\hline 17 &  5.53.1.26 & 302.054 & 23.695   &  0.000   \\
+\hline 18 &  120 & 0.000 & 0.000 &  0.000   \\
+\rowcolor{blue!25}\hline 19 & 186.148.62.33 & 303.300   & 17.808   &  303.300   \\
+\rowcolor{blue!25}\hline 20 &  186.148.62.34 & 349.613   & 63.907   &  46.313   \\
+\hline 21 &  23.3.254.242 & 303.657   & 18.741   &  0.000   \\
+\hline
+        \end{tabular}
+        \caption{$\overline{RTT}$, $\sigma$RTT y $\Delta$RTT para la ruta utilizada para llegar a web.mit.edu}
+        \label{table:mit} 
+    \end{center}
+\end{table}
+
+
+\subsubsection{RTT y $\Delta$RTT}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{data/rtt-mit-bar.png}
+        \caption{web.mit.edu - $\Delta$RTT}
+        \label{histo:mit}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{data/rtt-mit-lines.png}
+        \caption{web.mit.edu - RTT y $\Delta$RTT}
+        \label{lines:mit}
+    \end{center}
+\end{figure}
+
+
+Podemos ver en \ref{table:mit}, \ref{histo:mit} y \ref{lines:mit} que el $\Delta$RTT correspondiente a los $TTL$ $8$, $16$, $19$ y en menor medida $21$, son mas grande que el resto. En las siguientes secciones se analizará si estos corresponden a transmiciones por enlaces submarinos.
+
+
+\subsubsection{Test de Grubbs}\label{mit:grubbs}
+
+Previo a correr el test de Grubbs corrimos un test de normalidad sobre la distribución de $\Delta$RTT obteniendo los siguientes resultados:
+
+\begin{itemize}
+\item \textbf{z-score: 35.795}
+\item \textbf{p-value: 0.000}
+\end{itemize}
+
+De los resultados obtenidos deducimos entonces que la distribución de los $\Delta$RTT no es ``Normal'', igualmente como mencionamos en la sección \ref{desarrollo:stats} correremos el test de Grubbs a fin de corroborar luego si encuentra los enlaces submarinos de todas formas.\\
+Los resultados obtenidos fueron los siguientes outliers:
+
+\begin{itemize}
+\item 186.148.62.33
+\item 208.48.239.69
+\item 94.142.124.33
+\item 186.148.62.34
+\end{itemize}
+
+
+\subsubsection{Geolocalización}
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{| r | r | c | c |}
+  \hline
+  {\bf TTL} & \multicolumn{1}{|c|}{\bf IP} & {\bf DNS} & {\bf Ubicación}\\
+  \hline
+\hline 1 & 36.6.64.1 & no disponible & China, Hefei\\
+\hline 2 & 190.220.185.65 & no disponible & Argentina, Berazategui\\
+\hline 3 & 10.2.8.205 & no disponible & no disponible\\
+\hline 4 & 10.2.11.217 & no disponible & no disponible\\
+\hline 5 & 10.2.11.217 & no disponible & no disponible\\
+\hline 6 & 10.2.11.229 & no disponible & no disponible\\
+\hline 7 & 10.2.11.229 & no disponible & no disponible\\
+\rowcolor{blue!25}\hline 8 & 208.48.239.69 & 7-2-34.ear4.Miami2.Level3.net & United States, Lawrenceville\\
+\hline 9 & 4.69.207.38 & no disponible & United States, Kansas\\
+\hline 10 & 4.69.132.114 & no disponible & United States, Kansas\\
+\hline 11 & 4.69.140.133 & ae-2-2.ebr1.Dallas1.Level3.net & United States, Hialeah\\
+\hline 12 & 4.69.151.161 & ae-91-91.csw4.Dallas1.Level3.net & United States, Dallas\\
+\hline 13 & 4.69.145.209 & ae-4-90.edge5.Dallas3.Level3.net & United States, Dallas\\
+\hline 14 & 4.59.36.26 & TELEFONICA.edge5.Dallas3.Level3.net & United States, Kansas\\
+\hline 15 & 94.142.125.70 & no disponible  & España\\
+\rowcolor{blue!25}\hline 16 & 94.142.124.33 & no disponible & España\\
+\hline 17 & 5.53.1.26 & no disponible & España\\
+\hline 18 & * & no disponible & no disponible\\
+\rowcolor{blue!25}\hline 19 & 186.148.62.33 & akamai.Vl366.lflo.internacional.pe.nap.movistar.cl  & Chile, Santiago\\
+\rowcolor{blue!25}\hline 20 & 186.148.62.34 & akamai.Vl366.lflo.internacional.ce.nap.movistar.cl & Chile, Santiago\\
+\hline 21 & 23.3.254.242 & 242.deploy.static.akamaitechnologies.com & United States, Cambridge\\
+\hline
+        \end{tabular}
+        \caption{Ruta utilizada para llegar web.mit.edu con la ubicación de los diferentes saltos por los que se pasa. Se encuentran resaltados los saltos correspondientes a outliers encontrados con el test de Grubb}
+        \label{table:mit} 
+    \end{center}
+\end{table}
+
+En \ref{table:mit} se obserba que los saltos distinguidos corresponden efectivamente a enlaces submarinos. En el mapa \ref{mapa:mit} se puede apreciar el enlace intercontinental. Los saltos 6 y 7 aparecen en el mapa con el nombre de ``A'' y ``B'' respectivamente.
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{data/mapa-mit.jpg}
+        \caption{web.mit.edu - Traceroute}
+        \label{mapa:mit}
+    \end{center}
+\end{figure}
+
+Vemos, nuevamente, en \ref{mapa:mit} que los outliers encontrados corresponden a enlaces submarinos.
+

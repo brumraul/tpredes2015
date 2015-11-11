@@ -23,7 +23,6 @@ points5 = [stats.norm.rvs(size = 100), 1000, 1001, 1003]
 
 
 
-# si el normal test tiene un p-valor mayor a 0.05 rechazo la hipotesis, si no considero que la distribucion es normal
 def is_normal(points):
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
@@ -32,10 +31,9 @@ def is_normal(points):
 def hay_outliers(points):
 	mean = numpy.mean(points)
 	std = numpy.std(points)
-	if is_normal(points):
-		critical_value = critical_values_table[len(points)-1]
-		G = (max(points) - mean) / std
-		return G > critical_value 	 # rechazo la hipotesis nula si G > critical_value
+	critical_value = critical_values_table[len(points)-1]
+	G = (max(points) - mean) / std
+	return G > critical_value 	 # rechazo la hipotesis nula si G > critical_value
 									 # la hipotesis nula es: el valor maximo no es un oulier	
 										
 
