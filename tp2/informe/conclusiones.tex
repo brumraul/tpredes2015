@@ -18,10 +18,14 @@ En este caso de estudio se puede ver que con el test de Grubbs se detectaron cua
 
 \subsection{Universidad de Málaga}
 Este caso a diferencia de los otros el trace tiene un origen diferente (USA) quizás por eso la ruta parece más directa.
-Si bien la distrubución según el test no es normal, al localizar los outliers con el test de Grubbs se pudo encontrar el único enlace continetal en dicho path. Esto quedo claramente evidenciado en la figura \ref{histo:malaga} y la figura \ref{lines:malaga}.
+Si bien la distribución según el test no es normal, al localizar los outliers con el test de Grubbs se pudo encontrar el único enlace continental en dicho path. Esto quedo claramente evidenciado en la figura \ref{histo:malaga} y la figura \ref{lines:malaga}.
 Otro detalle menor es que los RTT son bastante más chicos comparados con los de los otros traces, esto quizás se deba a que es otro ISP en otro país.
 
 
 
 \subsection{Universidad MIT}
-La herramienta implementada detectó correctamente outliers en los tiempos de las rutas. y como se commentó anteriorente, estos correspondieron a enlaces submarinos. En cuanto a la ruta tomada por los paquetes enviados hacia el servidor con la página del MIT, podemos notar que la misma no es muy directa, saltando de servidores en EEUU hacia España, luego pasando por Chile para llegar nuevamente hacia EEUU. 
+Si bien al correr los test para esta universidad nos dimos cuentas que el servidor que contenía el sitio web se encontraba en Santiago de Chile en lugar de Estados Unidos por ser provisto por Akamai, decidimos dejarlo ya que por el mal ruteo de claro igualmente atravesamos enlaces transcontinentales.\\
+La herramienta implementada detectó correctamente outliers en los tiempos de las rutas. y como se comentó anteriormente, estos correspondieron a enlaces submarinos.\\ 
+Un dato llamativo en este caso de estudio es la gran cantidad de ip privadas que aparecen en las rutas. Estas direcciones ip privadas son conexiones entre routers configuradas como redes internas, configuradas de esa manera por el ISP.\\
+Algo para notar también es el horrible routeo que posee el isp claro ya que para ir a un host de un país limítrofe como Chile primero pasa por Estados Unidos y España para llegar hasta el host de destino incrementando el RTT de la conexión notablemente.
+

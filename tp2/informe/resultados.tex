@@ -355,7 +355,7 @@ En la tabla \ref{table:malaga} notamos que el salto 6 figura ubicado en Washingt
 
 
 \subsection{Universidad MIT}
-El host de destino fue la universidad M.I.T cuyo dominio es ``web.mit.edu'' con dirección ip ``23.3.254.242''. El server que contiene el sitio se encuentra en Boston, EEUU. El traceroute se originó en Buenos Aires.
+El host de destino fue la universidad M.I.T cuyo dominio es ``web.mit.edu'' con dirección ip ``23.3.254.242''. El server que contiene el sitio se encuentra ubicado en Santiago, Chile ya que es provisto por Akamai, una plataforma distribuida de contenidos de internet. El traceroute se originó en Buenos Aires utilizando como isp a claro.
 
 
 \subsubsection{Datos}
@@ -454,20 +454,20 @@ Los resultados obtenidos fueron los siguientes outliers:
 \hline 5 & 10.2.11.217 & no disponible & no disponible\\
 \hline 6 & 10.2.11.229 & no disponible & no disponible\\
 \hline 7 & 10.2.11.229 & no disponible & no disponible\\
-\rowcolor{blue!25}\hline 8 & 208.48.239.69 & 7-2-34.ear4.Miami2.Level3.net & United States, Lawrenceville\\
-\hline 9 & 4.69.207.38 & no disponible & United States, Kansas\\
-\hline 10 & 4.69.132.114 & no disponible & United States, Kansas\\
-\hline 11 & 4.69.140.133 & ae-2-2.ebr1.Dallas1.Level3.net & United States, Hialeah\\
+\rowcolor{blue!25}\hline 8 & 208.48.239.69 & 7-2-34.ear4.Miami2.Level3.net & United States, Florida\\
+\hline 9 & 4.69.207.38 & no disponible & United States, Washington\\
+\hline 10 & 4.69.132.114 & no disponible & United States, Washington\\
+\hline 11 & 4.69.140.133 & ae-2-2.ebr1.Dallas1.Level3.net & United States, Dallas\\
 \hline 12 & 4.69.151.161 & ae-91-91.csw4.Dallas1.Level3.net & United States, Dallas\\
 \hline 13 & 4.69.145.209 & ae-4-90.edge5.Dallas3.Level3.net & United States, Dallas\\
-\hline 14 & 4.59.36.26 & TELEFONICA.edge5.Dallas3.Level3.net & United States, Kansas\\
-\hline 15 & 94.142.125.70 & no disponible  & España\\
-\rowcolor{blue!25}\hline 16 & 94.142.124.33 & no disponible & España\\
-\hline 17 & 5.53.1.26 & no disponible & España\\
+\hline 14 & 4.59.36.26 & TELEFONICA.edge5.Dallas3.Level3.net & United States, Dallas\\
+\hline 15 & 94.142.125.70 & no disponible  & United States, Florida\\
+\rowcolor{blue!25}\hline 16 & 94.142.124.33 & no disponible & España, Madrid\\
+\hline 17 & 5.53.1.26 & no disponible & España, Madrid\\
 \hline 18 & * & no disponible & no disponible\\
 \rowcolor{blue!25}\hline 19 & 186.148.62.33 & akamai.Vl366.lflo.internacional.pe.nap.movistar.cl  & Chile, Santiago\\
 \rowcolor{blue!25}\hline 20 & 186.148.62.34 & akamai.Vl366.lflo.internacional.ce.nap.movistar.cl & Chile, Santiago\\
-\hline 21 & 23.3.254.242 & 242.deploy.static.akamaitechnologies.com & Chile\\
+\hline 21 & 23.3.254.242 & 242.deploy.static.akamaitechnologies.com & Chile, Santiago\\
 \hline
         \end{tabular}
         \caption{Ruta utilizada para llegar web.mit.edu con la ubicación de los diferentes saltos por los que se pasa. Se encuentran resaltados los saltos correspondientes a outliers encontrados con el test de Grubb}
@@ -477,8 +477,7 @@ Los resultados obtenidos fueron los siguientes outliers:
 
 En el cuadro \ref{table:mit} se observa que los saltos distinguidos corresponden a enlaces submarinos. Podemos notar que el primer salto ocurre a un servidor que nuestras herramientas de geolocalización sitúan en China, pero si notamos el rtt hacia el mismo, es probable que la localización sea errónea. Luego de investigar esa ip, nos dimos cuenta que, realizando traceroutes hacia servidores que se encuentran en Argentina, la ip 36.6.64.1 aparece igualmente, lo que, aunque no es imposible, tiene poco sentido si el servidor realmente se encuentra en China. \\
     Teniendo en cuenta esto, el rtt bajo y el hecho de que rutas hacia servidores en  argentina también pasan por dicha ip, creemos que el servidor correspondiente pertenece a alguna red interna del ISP (Claro en este caso), posiblemente con alguna mala configuración.
-    Otro dato raro, en comparación con las demás rutas, es la cantidad de ip privadas que aparecen en las rutas. Estas direcciones ip privadas son conexiones entre routers configuradas como redes privadas, configuradas de esa manera por el ISP.
-    Podemos notar que la ruta pareciera ser muy indirecta, teniendo como destino un servidor localizado en Chile, país limitrofe con Argentina, pero ruteando los paquetes usando conexiones submarinas, pasando por EEUU y España.
+Por este motivo al trazar el traceroute sobre el mapa lo ubicaremos en Buenos Aires, Argentina.
 
 
 \begin{figure}[H]
