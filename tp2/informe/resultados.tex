@@ -385,8 +385,8 @@ Los datos obtenidos para este caso fueron los siguientes:
 \hline 15 &  94.142.125.70 & 208.940   & 20.446   &  33.468   \\
 \rowcolor{blue!25}\hline 16 & 94.142.124.33 & 303.767   & 24.269   &  94.828   \\
 \hline 17 &  5.53.1.26 & 302.054 & 23.695   &  0.000   \\
-\hline 18 &  120 & 0.000 & 0.000 &  0.000   \\
-\rowcolor{blue!25}\hline 19 & 186.148.62.33 & 303.300   & 17.808   &  303.300   \\
+\hline 18 &  * & 0.000 & 0.000 &  0.000   \\
+\hline 19 & 186.148.62.33 & 303.300   & 17.808   &  0.467   \\
 \rowcolor{blue!25}\hline 20 &  186.148.62.34 & 349.613   & 63.907   &  46.313   \\
 \hline 21 &  23.3.254.242 & 303.657   & 18.741   &  0.000   \\
 \hline
@@ -416,7 +416,7 @@ Los datos obtenidos para este caso fueron los siguientes:
 \end{figure}
 
 
-Podemos ver en las figuras \ref{table:mit}, \ref{histo:mit} y en el cuadro \ref{lines:mit} que el $\Delta$RTT correspondiente a los $TTL$ $8$, $16$, $19$ y en menor medida $21$, son mas grande que el resto. En las siguientes secciones se analizará si estos corresponden a transmiciones por enlaces submarinos.
+Podemos ver en las figuras \ref{table:mit}, \ref{histo:mit} y en el cuadro \ref{lines:mit} que el $\Delta$RTT correspondiente a los $TTL$ $8$, $16$ y en menor medida $20$, son mas grande que el resto. En las siguientes secciones se analizará si estos corresponden a transmiciones por enlaces submarinos.
 
 
 \subsubsection{Test de Grubbs}\label{mit:grubbs}
@@ -432,7 +432,6 @@ De los resultados obtenidos deducimos entonces que la distribución de los $\Del
 Los resultados obtenidos fueron los siguientes outliers:
 
 \begin{itemize}
-\item 186.148.62.33
 \item 208.48.239.69
 \item 94.142.124.33
 \item 186.148.62.34
@@ -465,7 +464,7 @@ Los resultados obtenidos fueron los siguientes outliers:
 \rowcolor{blue!25}\hline 16 & 94.142.124.33 & no disponible & España, Madrid\\
 \hline 17 & 5.53.1.26 & no disponible & España, Madrid\\
 \hline 18 & * & no disponible & no disponible\\
-\rowcolor{blue!25}\hline 19 & 186.148.62.33 & akamai.Vl366.lflo.internacional.pe.nap.movistar.cl  & Chile, Santiago\\
+\hline 19 & 186.148.62.33 & akamai.Vl366.lflo.internacional.pe.nap.movistar.cl  & Chile, Santiago\\
 \rowcolor{blue!25}\hline 20 & 186.148.62.34 & akamai.Vl366.lflo.internacional.ce.nap.movistar.cl & Chile, Santiago\\
 \hline 21 & 23.3.254.242 & 242.deploy.static.akamaitechnologies.com & Chile, Santiago\\
 \hline
@@ -477,12 +476,13 @@ Los resultados obtenidos fueron los siguientes outliers:
 
 En el cuadro \ref{table:mit} se observa que los saltos distinguidos corresponden a enlaces submarinos. Podemos notar que el primer salto ocurre a un servidor que nuestras herramientas de geolocalización sitúan en China, pero si notamos el rtt hacia el mismo, es probable que la localización sea errónea. Luego de investigar esa ip, nos dimos cuenta que, realizando traceroutes hacia servidores que se encuentran en Argentina, la ip 36.6.64.1 aparece igualmente, lo que, aunque no es imposible, tiene poco sentido si el servidor realmente se encuentra en China. \\
     Teniendo en cuenta esto, el rtt bajo y el hecho de que rutas hacia servidores en  argentina también pasan por dicha ip, creemos que el servidor correspondiente pertenece a alguna red interna del ISP (Claro en este caso), posiblemente con alguna mala configuración.
-Por este motivo al trazar el traceroute sobre el mapa lo ubicaremos en Buenos Aires, Argentina.
+Por este motivo al trazar el traceroute sobre el mapa lo ubicaremos en Buenos Aires, Argentina.\\
+En el cuadro \ref{table:mit} notamos ademas que si bien los servicios de geolocalización ubican a la ip 186.148.62.33 en Santiago, Chile viendo el RTT de dicho salto consideramos que se trata de un error en la base de datos de geolocalización y esa ip se encuentra en Madrid España produciéndose el salto transcontinental en el próximo hop. En el traceroute sobre el mapa lo ubicaremos en este ultimo lugar.
 
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=1\textwidth]{data/mapa-mit.jpg}
+        \includegraphics[width=1\textwidth]{data/mapa-mit.png}
         \caption{web.mit.edu - Traceroute}
         \label{mapa:mit}
     \end{center}
